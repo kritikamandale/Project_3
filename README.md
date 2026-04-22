@@ -1,4 +1,4 @@
-# Project Title
+# Personalized Nutrition-Based Menu Filtering and Recommendation System
 ```
 Author(s): Kritika Mandale
 Affiliation: SVPCET
