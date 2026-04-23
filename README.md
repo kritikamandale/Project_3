@@ -59,11 +59,6 @@ Database:
 Libraries & APIs:
 - Nutrition APIs (Edamam / Spoonacular)
 - Chart.js (for visualization)
-
-Tools:
-- VS Code
-- GitHub
-- Postman
 ```
 
 ## Results and Discussion
@@ -85,7 +80,6 @@ Proposed System:
 - Personalized recommendations
 - Decision-based suggestions
 
-“Information alone does not change behavior—actionable insights do.”
 ```
 
 ## Limitation
