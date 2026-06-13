@@ -1,26 +1,285 @@
 @import "tailwindcss";
 
+/* ─── Pichwai Design Tokens ─────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core Pichwai palette */
+  --pichwai-dark-brown:    #2D1B00;
+  --pichwai-mid-brown:     #5C3A1E;
+  --pichwai-warm-brown:    #8B5E3C;
+  --pichwai-light-brown:   #C4956A;
+  --pichwai-saffron:       #FF6B00;
+  --pichwai-saffron-deep:  #CC4A00;
+  --pichwai-saffron-light: #FF9A3C;
+  --pichwai-marigold:      #F4A825;
+  --pichwai-marigold-pale: #FAD481;
+  --pichwai-cream:         #FFF8E7;
+  --pichwai-ivory:         #FDF3D0;
+  --pichwai-pale-gold:     #F5E6B3;
+  --pichwai-gold:          #D4AF37;
+  --pichwai-gold-deep:     #B8860B;
+  --pichwai-gold-light:    #EDD97A;
+  --pichwai-peacock:       #006994;
+  --pichwai-peacock-deep:  #004D70;
+  --pichwai-peacock-teal:  #008080;
+  --pichwai-peacock-light: #4FB3CF;
+  --pichwai-lotus:         #C2185B;
+  --pichwai-lotus-deep:    #880E4F;
+  --pichwai-lotus-light:   #F48FB1;
+  --pichwai-lotus-pale:    #FCE4EC;
+  --pichwai-leaf:          #2E7D32;
+  --pichwai-leaf-light:    #66BB6A;
+  --pichwai-ruby:          #C62828;
+  --pichwai-ruby-deep:     #8B0000;
+  --pichwai-indigo-deep:   #1A237E;
+  --pichwai-indigo:        #3949AB;
+  --pichwai-mango:         #FFC107;
+
+  /* Spec-defined semantic tokens */
+  --background:      #FFF8E7;
+  --foreground:      #3E2000;
+  --card-bg:         #FFFDF5;
+  --border-gold:     rgba(201, 147, 58, 0.3);
+  --border-brown:    rgba(62, 32, 0, 0.12);
+  --shadow-pichwai:  0 4px 24px rgba(62, 32, 0, 0.08), 0 1px 4px rgba(201, 147, 58, 0.15);
+  --shadow-card:     0 2px 16px rgba(62, 32, 0, 0.06);
+  --gradient-saffron: linear-gradient(135deg, #FFF8E7 0%, #FFE0A0 100%);
+  --gradient-indigo:  linear-gradient(135deg, #1A2799 0%, #3D4FFF 100%);
+  --gradient-pichwai: linear-gradient(135deg, #1A0D00 0%, #3D4FFF 50%, #C9933A 100%);
+
+  /* Border radius scale */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius:    0.75rem;
+
+  /* Component semantic tokens */
+  --card:         #FFFDF5;
+  --card-fg:      #3E2000;
+  --primary:      #C9933A;
+  --primary-fg:   #3E2000;
+  --secondary:    #006994;
+  --secondary-fg: #FFF8E7;
+  --accent:       #FF6B00;
+  --accent-fg:    #FFF8E7;
+  --muted:        #F5EFE6;
+  --muted-fg:     #6B5244;
+  --border:       #E8DCCA;
+  --ring:         #C9933A;
+  --destructive:  #C62828;
+  --success:      #2E7D32;
+  --warning:      #F4A825;
+}
+
+.dark {
+  --background:   #1A0F00;
+  --foreground:   #FFF8E7;
+  --card-bg:      #2D1B00;
+  --card:         #2D1B00;
+  --card-fg:      #FFF8E7;
+  --muted:        #4A3528;
+  --muted-fg:     #B89880;
+  --border:       #4A3528;
+  --border-gold:  rgba(201, 147, 58, 0.2);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background:  var(--background);
+  --color-foreground:  var(--foreground);
+  --font-sans:  var(--font-poppins), var(--font-geist-sans);
+  --font-mono:  var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
+  /* Expose all Pichwai tokens as Tailwind colors */
+  --color-pichwai-dark-brown:    var(--pichwai-dark-brown);
+  --color-pichwai-cream:         var(--pichwai-cream);
+  --color-pichwai-gold:          var(--pichwai-gold);
+  --color-pichwai-saffron:       var(--pichwai-saffron);
+  --color-pichwai-peacock:       var(--pichwai-peacock);
+  --color-pichwai-lotus:         var(--pichwai-lotus);
+  --color-pichwai-marigold:      var(--pichwai-marigold);
+  --color-pichwai-ruby:          var(--pichwai-ruby);
+  --color-pichwai-ivory:         var(--pichwai-ivory);
+  --color-pichwai-indigo:        var(--pichwai-indigo);
+  --color-pichwai-leaf:          var(--pichwai-leaf);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base styles ────────────────────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+/* ─── Pichwai ambient background pattern ─────────────────────────────────── */
+/*
+  Inline SVG lotus motif encoded as a data URL for the repeating tile.
+  Opacity is kept at 0.04 so it's a whisper — not a shout.
+*/
+.pichwai-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23C9933A' fill-opacity='0.18'%3E%3Cellipse cx='40' cy='27' rx='5' ry='13' /%3E%3Cellipse cx='40' cy='27' rx='5' ry='13' transform='rotate(45 40 40)'/%3E%3Cellipse cx='40' cy='27' rx='5' ry='13' transform='rotate(90 40 40)'/%3E%3Cellipse cx='40' cy='27' rx='5' ry='13' transform='rotate(135 40 40)'/%3E%3Cellipse cx='40' cy='27' rx='5' ry='13' transform='rotate(180 40 40)'/%3E%3Cellipse cx='40' cy='27' rx='5' ry='13' transform='rotate(225 40 40)'/%3E%3Cellipse cx='40' cy='27' rx='5' ry='13' transform='rotate(270 40 40)'/%3E%3Cellipse cx='40' cy='27' rx='5' ry='13' transform='rotate(315 40 40)'/%3E%3Ccircle cx='40' cy='40' r='5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 80px 80px;
+}
+
+/* ─── Typography utilities ───────────────────────────────────────────────── */
+
+.font-display { font-family: var(--font-playfair), Georgia, serif; }
+.font-cinzel  { font-family: var(--font-cinzel), serif; }
+.font-poppins { font-family: var(--font-poppins), sans-serif; }
+
+.text-display { font-size: 4.5rem; line-height: 1.1; letter-spacing: -0.02em; }
+.text-hero    { font-size: 3rem;   line-height: 1.2; letter-spacing: -0.015em; }
+.text-title   { font-size: 2rem;   line-height: 1.3; letter-spacing: -0.01em; }
+.text-heading { font-size: 1.5rem; line-height: 1.35; }
+.text-subhead { font-size: 1.125rem; line-height: 1.5; }
+.text-body    { font-size: 1rem;   line-height: 1.6; }
+.text-small   { font-size: 0.875rem; line-height: 1.5; }
+.text-caption { font-size: 0.75rem; line-height: 1.4; }
+
+/* ─── Pichwai utility classes ───────────────────────────────────────────── */
+
+.gold-text {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 50%, #EDD97A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gold-text-spec {
+  background: linear-gradient(135deg, #C9933A 0%, #8B621A 50%, #E8C06B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pichwai-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pichwai);
+}
+
+.pichwai-surface {
+  background-color: rgba(255, 248, 231, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.pichwai-glass {
+  background: rgba(255, 253, 245, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-gold);
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 147, 58, 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: goldShimmer 2s linear infinite;
+}
+
+.gold-border {
+  border: 1px solid var(--border-gold);
+}
+
+.gold-border-thick {
+  border: 2px solid rgba(201, 147, 58, 0.5);
+}
+
+/* ─── Scrollbar styling ──────────────────────────────────────────────────── */
+
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--pichwai-cream); }
+::-webkit-scrollbar-thumb { background: rgba(201, 147, 58, 0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(201, 147, 58, 0.7); }
+
+/* ─── Selection color ────────────────────────────────────────────────────── */
+
+::selection {
+  background: rgba(201, 147, 58, 0.25);
+  color: #3E2000;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────────────────── */
+
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes lotusBloom {
+  0%   { transform: scale(0) rotate(-180deg); opacity: 0; }
+  60%  { transform: scale(1.08) rotate(8deg);  opacity: 1; }
+  100% { transform: scale(1) rotate(0deg);     opacity: 1; }
+}
+
+@keyframes peacockWave {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%       { transform: translateY(-6px) rotate(-2deg); }
+  75%       { transform: translateY(-6px) rotate(2deg); }
+}
+
+@keyframes fadeInUp {
+  0%   { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+@keyframes scaleIn {
+  0%   { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+/* ─── Animation utilities ───────────────────────────────────────────────── */
+
+.animate-lotus-bloom  { animation: lotusBloom  1.5s ease-in-out; }
+.animate-peacock-wave { animation: peacockWave 3s ease-in-out infinite; }
+.animate-gold-shimmer { animation: goldShimmer 2s linear infinite; }
+.animate-fade-in-up   { animation: fadeInUp    0.5s ease-out; }
+.animate-fade-in      { animation: fadeIn      0.3s ease-out; }
+.animate-scale-in     { animation: scaleIn     0.3s ease-out; }
+.animate-pulse-slow   { animation: pulseSlow   2s ease-in-out infinite; }
+
+/* Staggered children (CSS-based) */
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 80ms; }
+.stagger > *:nth-child(3) { animation-delay: 160ms; }
+.stagger > *:nth-child(4) { animation-delay: 240ms; }
+.stagger > *:nth-child(5) { animation-delay: 320ms; }
+.stagger > *:nth-child(6) { animation-delay: 400ms; }
+
+/* ─── Focus visible ring ─────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid rgba(201, 147, 58, 0.7);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
