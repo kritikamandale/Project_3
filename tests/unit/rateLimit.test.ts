@@ -8,7 +8,7 @@ jest.mock('@/lib/redis/client', () => ({
       zadd:            jest.fn().mockReturnThis(),
       zcard:           jest.fn().mockReturnThis(),
       pexpire:         jest.fn().mockReturnThis(),
-      exec: jest.fn().mockResolvedValue([null, null, [null, 1], null]),
+      exec: jest.fn<() => Promise<(unknown[] | null)[]>>().mockResolvedValue([null, null, [null, 1], null]),
     })),
   },
 }));

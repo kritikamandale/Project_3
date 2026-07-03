@@ -48,15 +48,14 @@ function EmptyState() {
       animate="visible"
       className="col-span-full flex flex-col items-center gap-6 py-20 text-center"
     >
-      {/* Pichwai lotus illustration placeholder */}
-      <div className="flex h-32 w-32 items-center justify-center rounded-full bg-pichwai-cream-100 text-6xl">
+      <div className="flex h-32 w-32 items-center justify-center rounded-full bg-[rgba(201,147,58,0.1)] text-6xl">
         🌸
       </div>
       <div>
-        <h3 className="font-playfair text-xl font-semibold text-pichwai-brown-700">
+        <h3 className="font-display text-xl font-semibold text-white">
           No vendors found
         </h3>
-        <p className="mt-1 text-sm text-pichwai-brown-400">
+        <p className="mt-1 text-sm text-[rgba(255,255,255,0.7)]">
           Try adjusting your filters or search terms
         </p>
       </div>
@@ -66,16 +65,16 @@ function EmptyState() {
 
 function VendorCardSkeleton() {
   return (
-    <div className="animate-pulse overflow-hidden rounded-2xl border border-pichwai-gold-100 bg-white">
-      <div className="aspect-[4/3] bg-pichwai-cream-100" />
+    <div className="animate-pulse overflow-hidden rounded-3xl border border-[rgba(201,147,58,0.3)] bg-[rgba(42,8,16,0.95)] backdrop-blur-md">
+      <div className="aspect-[4/3] bg-[rgba(255,255,255,0.05)]" />
       <div className="flex flex-col gap-2 p-4">
-        <div className="h-3 w-20 rounded bg-pichwai-cream-200" />
-        <div className="h-4 w-3/4 rounded bg-pichwai-cream-200" />
-        <div className="h-3 w-1/2 rounded bg-pichwai-cream-200" />
-        <div className="h-3 w-32 rounded bg-pichwai-cream-200" />
+        <div className="h-3 w-20 rounded bg-[rgba(255,255,255,0.1)]" />
+        <div className="h-4 w-3/4 rounded bg-[rgba(255,255,255,0.1)]" />
+        <div className="h-3 w-1/2 rounded bg-[rgba(255,255,255,0.1)]" />
+        <div className="h-3 w-32 rounded bg-[rgba(255,255,255,0.1)]" />
         <div className="mt-2 flex justify-between">
-          <div className="h-5 w-20 rounded bg-pichwai-cream-200" />
-          <div className="h-7 w-20 rounded-lg bg-pichwai-cream-200" />
+          <div className="h-5 w-20 rounded bg-[rgba(255,255,255,0.1)]" />
+          <div className="h-7 w-20 rounded-lg bg-[rgba(255,255,255,0.1)]" />
         </div>
       </div>
     </div>
@@ -126,73 +125,76 @@ export default function VendorsPage() {
   }, [hasMore, isValidating, setSize]);
 
   return (
-    <div className="min-h-screen bg-pichwai-cream-50 pb-20">
+    <div className="relative min-h-screen pb-20">
+      {/* Full-screen blurred overlay to soften the global pattern */}
+      <div className="fixed inset-0 z-0 backdrop-blur-2xl bg-[rgba(42,8,16,0.75)]" />
+      
       {/* Hero header */}
-      <section className="border-b border-pichwai-gold-100 bg-white px-4 py-8 sm:px-8">
-        <div className="mx-auto max-w-7xl">
-          <h1 className="font-playfair text-3xl font-bold text-pichwai-brown-800 sm:text-4xl">
+      <div className="relative z-10 border-b border-[rgba(201,147,58,0.2)] bg-[rgba(42,8,16,0.95)] backdrop-blur-md px-4 py-8 sm:px-8 xl:px-12 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <div className="mx-auto max-w-[1600px]">
+          <h1 className="font-display text-3xl font-bold text-white sm:text-4xl drop-shadow-md">
             Find the Perfect Vendor
           </h1>
-          <p className="mt-2 text-pichwai-brown-500">
+          <p className="mt-2 text-[rgba(255,255,255,0.7)]">
             {total > 0 ? `${total.toLocaleString('en-IN')} verified vendors across India` : 'Browse verified vendors across India'}
           </p>
 
           {/* Top search bar */}
           <div className="mt-5 flex gap-3">
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-pichwai-brown-300" />
+              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--pichwai-gold)]" />
               <input
                 type="text"
                 placeholder="Search photographers, caterers, decorators…"
                 value={filters.search}
                 onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
-                className="w-full rounded-xl border border-pichwai-gold-200 bg-pichwai-cream-50 py-3 pl-12 pr-4 text-sm text-pichwai-brown-800 placeholder:text-pichwai-brown-300 focus:border-pichwai-gold-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold-100"
+                className="w-full rounded-xl border border-[rgba(201,147,58,0.4)] bg-[rgba(0,0,0,0.2)] py-3 pl-12 pr-4 text-sm text-white placeholder:text-[rgba(255,255,255,0.5)] focus:border-[var(--pichwai-gold)] focus:outline-none focus:ring-2 focus:ring-[rgba(201,147,58,0.2)] backdrop-blur-md"
               />
             </div>
             {/* Sort */}
             <select
               value={filters.sortBy}
               onChange={(e) => setFilters((f) => ({ ...f, sortBy: e.target.value }))}
-              className="hidden rounded-xl border border-pichwai-gold-200 bg-white px-4 py-3 text-sm text-pichwai-brown-700 focus:border-pichwai-gold-400 focus:outline-none sm:block"
+              className="hidden rounded-xl border border-[rgba(201,147,58,0.4)] bg-[rgba(0,0,0,0.2)] px-4 py-3 text-sm text-[var(--pichwai-gold)] focus:border-[var(--pichwai-gold)] focus:outline-none sm:block backdrop-blur-md"
             >
               {SORT_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
+                <option key={o.value} value={o.value} className="bg-[#2A0810] text-white">{o.label}</option>
               ))}
             </select>
             {/* Mobile filter toggle */}
             <button
               onClick={() => setMobileFilters(true)}
-              className="flex items-center gap-2 rounded-xl border border-pichwai-gold-200 bg-white px-4 py-3 text-sm text-pichwai-brown-700 lg:hidden"
+              className="flex items-center gap-2 rounded-xl border border-[rgba(201,147,58,0.4)] bg-[rgba(0,0,0,0.2)] px-4 py-3 text-sm text-[var(--pichwai-gold)] lg:hidden backdrop-blur-md"
             >
               <SlidersHorizontal className="h-4 w-4" />
               <span className="hidden sm:inline">Filters</span>
             </button>
           </div>
         </div>
-      </section>
+      </div>
 
-      <div className="mx-auto flex max-w-7xl gap-6 px-4 pt-6 sm:px-8">
+      <div className="relative z-10 mx-auto flex max-w-[1600px] gap-8 px-4 pt-6 sm:px-8 xl:px-12">
         {/* Desktop sidebar */}
-        <aside className="hidden w-72 shrink-0 lg:block">
+        <aside className="hidden w-[450px] shrink-0 lg:block">
           <div className="sticky top-20">
             <VendorFilters filters={filters} onChange={setFilters} />
           </div>
         </aside>
 
         {/* Results grid */}
-        <main className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0">
           {/* Sort bar (mobile) */}
           <div className="mb-4 flex items-center justify-between lg:hidden">
-            <p className="text-sm text-pichwai-brown-500">
+            <p className="text-sm text-[rgba(255,255,255,0.7)]">
               {total > 0 && `${total.toLocaleString('en-IN')} results`}
             </p>
             <select
               value={filters.sortBy}
               onChange={(e) => setFilters((f) => ({ ...f, sortBy: e.target.value }))}
-              className="rounded-lg border border-pichwai-gold-200 bg-white px-3 py-1.5 text-xs text-pichwai-brown-700 focus:outline-none"
+              className="rounded-lg border border-[rgba(201,147,58,0.4)] bg-[rgba(0,0,0,0.2)] px-3 py-1.5 text-xs text-[var(--pichwai-gold)] focus:outline-none backdrop-blur-md"
             >
               {SORT_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
+                <option key={o.value} value={o.value} className="bg-[#2A0810] text-white">{o.label}</option>
               ))}
             </select>
           </div>
@@ -227,7 +229,7 @@ export default function VendorsPage() {
               <Loader2 className="h-6 w-6 animate-spin text-pichwai-gold-400" />
             )}
           </div>
-        </main>
+        </div>
       </div>
 
       {/* Mobile filter drawer */}
@@ -242,21 +244,21 @@ export default function VendorsPage() {
             <motion.div
               initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed inset-y-0 left-0 z-50 w-[min(85vw,360px)] overflow-y-auto bg-white shadow-2xl"
+              className="fixed inset-y-0 left-0 z-50 w-[min(85vw,360px)] overflow-y-auto bg-[rgba(42,8,16,0.95)] backdrop-blur-xl border-r border-[rgba(201,147,58,0.3)] shadow-2xl"
             >
-              <div className="flex items-center justify-between border-b border-pichwai-gold-100 px-5 py-4">
-                <span className="font-playfair text-lg font-semibold text-pichwai-brown-800">Filters</span>
+              <div className="flex items-center justify-between border-b border-[rgba(201,147,58,0.2)] px-5 py-4">
+                <span className="font-display text-lg font-semibold text-white">Filters</span>
                 <button onClick={() => setMobileFilters(false)}>
-                  <X className="h-5 w-5 text-pichwai-brown-500" />
+                  <X className="h-5 w-5 text-[rgba(255,255,255,0.7)] hover:text-white" />
                 </button>
               </div>
               <div className="p-4">
                 <VendorFilters filters={filters} onChange={setFilters} isMobile />
               </div>
-              <div className="border-t border-pichwai-gold-100 px-5 py-4">
+              <div className="border-t border-[rgba(201,147,58,0.2)] px-5 py-4">
                 <button
                   onClick={() => setMobileFilters(false)}
-                  className="w-full rounded-xl bg-gradient-to-r from-pichwai-gold-500 to-pichwai-saffron-500 py-3 text-sm font-semibold text-white"
+                  className="w-full rounded-xl bg-[var(--pichwai-gold)] py-3 text-sm font-bold text-[#2A0810] hover:bg-white"
                 >
                   Show {total > 0 ? total.toLocaleString('en-IN') : ''} Results
                 </button>

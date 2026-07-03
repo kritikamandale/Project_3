@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import useSWR from 'swr';
 import { AIAssistant } from '@/components/ai/AIAssistant';
 
 interface EventOption {
@@ -9,26 +10,22 @@ interface EventOption {
   title: string;
 }
 
-export default function AIAssistantPage() {
-  const [events, setEvents]   = useState<EventOption[]>([]);
-  const [loading, setLoading] = useState(true);
+const fetcher = (url: string) =>
+  fetch(url).then((r) => (r.ok ? r.json() : { events: [] })) as Promise<{ events: EventOption[] }>;
 
-  useEffect(() => {
-    fetch('/api/events')
-      .then((r) => r.json())
-      .then((data: { events?: EventOption[] }) => {
-        setEvents(data.events ?? []);
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, []);
+export default function AIAssistantPage() {
+  const { data, isLoading: loading } = useSWR('/api/events?limit=50', fetcher, {
+    revalidateOnFocus: false,
+  });
+  const events = data?.events ?? [];
 
   return (
     <div className="h-full flex flex-col">
       {/* Page header */}
       <motion.div
-        initial={{ opacity: 0, y: -12 }}
+        initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
         className="mb-6 flex-shrink-0"
       >
         <div className="flex items-center gap-3">
@@ -79,9 +76,9 @@ export default function AIAssistantPage() {
         <div className="space-y-4">
           {/* How to use */}
           <motion.div
-            initial={{ opacity: 0, x: 16 }}
+            initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.2 }}
             className="bg-white rounded-2xl border border-pichwai-gold/20 p-5"
           >
             <h3 className="font-semibold text-pichwai-brown mb-3 text-sm">💡 What you can ask</h3>
@@ -111,9 +108,9 @@ export default function AIAssistantPage() {
 
           {/* Plan info */}
           <motion.div
-            initial={{ opacity: 0, x: 16 }}
+            initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ duration: 0.2, delay: 0.05 }}
             className="bg-gradient-to-br from-pichwai-saffron/10 to-pichwai-gold/10 rounded-2xl border border-pichwai-gold/20 p-5"
           >
             <h3 className="font-semibold text-pichwai-brown mb-2 text-sm">📊 Your Plan</h3>
@@ -133,9 +130,9 @@ export default function AIAssistantPage() {
 
           {/* Indian events card */}
           <motion.div
-            initial={{ opacity: 0, x: 16 }}
+            initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ duration: 0.2, delay: 0.1 }}
             className="bg-white rounded-2xl border border-pichwai-gold/20 p-5"
           >
             <h3 className="font-semibold text-pichwai-brown mb-3 text-sm">🎊 Specialities</h3>

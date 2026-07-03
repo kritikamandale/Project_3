@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { eq, inArray } from 'drizzle-orm';
 import { z } from 'zod/v4';
 import { db, vendors } from '@/lib/db';
-import { anthropic } from '@/lib/anthropic/client';
+import { groq, GROQ_MODEL, SYSTEM_PROMPT } from '@/lib/groq/client';
 import { searchSimilarVendors } from '@/lib/pinecone/embeddings';
-import { SYSTEM_PROMPT } from '@/lib/anthropic/client';
 
 const BodySchema = z.object({
   query:      z.string().min(3).max(500),
@@ -76,7 +75,7 @@ export async function POST(req: NextRequest) {
           .limit(10)
       : [];
 
-  // Step 3: Format context for Claude
+  // Step 3: Format vendor context for AI recommendation
   const vendorContext =
     vendorRows.length > 0
       ? vendorRows
@@ -99,15 +98,16 @@ export async function POST(req: NextRequest) {
     'Focus on the most relevant ones. Do NOT invent vendors not listed above.',
   ].join('');
 
-  const message = await anthropic.messages.create({
-    model: 'claude-sonnet-4-6',
+  const completion = await groq.chat.completions.create({
+    model: GROQ_MODEL,
     max_tokens: 400,
-    system: SYSTEM_PROMPT,
-    messages: [{ role: 'user', content: prompt }],
+    messages: [
+      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'user', content: prompt },
+    ],
   });
 
-  const recommendation =
-    message.content[0]?.type === 'text' ? message.content[0].text : '';
+  const recommendation = completion.choices[0]?.message?.content ?? '';
 
   return NextResponse.json({
     recommendations: recommendation,

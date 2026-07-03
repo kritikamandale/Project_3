@@ -1,6 +1,6 @@
 import { type NextRequest } from 'next/server';
 import { eq } from 'drizzle-orm';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 import slugify from 'slugify';
 import { nanoid } from 'nanoid';
 import { db, vendors } from '@/lib/db';
@@ -27,7 +27,7 @@ const CreateVendorSchema = z.object({
   yearsExperience:  z.number().int().min(0).optional(),
   packages:         z.array(z.object({ name: z.string(), price: z.number(), inclusions: z.array(z.string()) })).optional(),
   faq:              z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-  metadata:         z.record(z.unknown()).optional(),
+  metadata:         z.record(z.string(), z.unknown()).optional(),
 });
 
 export async function POST(req: NextRequest) {

@@ -1,15 +1,17 @@
-import Anthropic from '@anthropic-ai/sdk';
+import Groq from 'groq-sdk';
 
-const globalForAnthropic = globalThis as unknown as {
-  anthropic: Anthropic | undefined;
+const globalForGroq = globalThis as unknown as {
+  groq: Groq | undefined;
 };
 
-export const anthropic =
-  globalForAnthropic.anthropic ??
-  new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
+export const groq =
+  globalForGroq.groq ??
+  new Groq({ apiKey: process.env.GROQ_API_KEY! });
 
 if (process.env.NODE_ENV !== 'production')
-  globalForAnthropic.anthropic = anthropic;
+  globalForGroq.groq = groq;
+
+export const GROQ_MODEL = 'llama-3.3-70b-versatile';
 
 export const SYSTEM_PROMPT = `
 You are EventNest AI — a warm, expert Indian event planning assistant. You help hosts plan beautiful events for weddings, birthdays, kiddie parties, farewells, and family meetups across India.

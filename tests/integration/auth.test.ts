@@ -9,10 +9,10 @@ import { describe, it, expect, beforeAll, afterAll, jest } from '@jest/globals';
 
 // ─── Mock external services that are not under test ──────────────────────────
 jest.mock('@/lib/resend/client', () => ({
-  resend: { emails: { send: jest.fn().mockResolvedValue({ id: 'mock-email-id' }) } },
+  resend: { emails: { send: jest.fn<() => Promise<{ id: string }>>().mockResolvedValue({ id: 'mock-email-id' }) } },
 }));
 jest.mock('@/lib/twilio/client', () => ({
-  twilioClient: { messages: { create: jest.fn().mockResolvedValue({ sid: 'mock-sms-sid' }) } },
+  twilioClient: { messages: { create: jest.fn<() => Promise<{ sid: string }>>().mockResolvedValue({ sid: 'mock-sms-sid' }) } },
 }));
 jest.mock('@/lib/redis/client', () => {
   const store = new Map<string, string>();
@@ -23,12 +23,12 @@ jest.mock('@/lib/redis/client', () => {
         zadd: jest.fn().mockReturnThis(),
         zcard: jest.fn().mockReturnThis(),
         pexpire: jest.fn().mockReturnThis(),
-        exec: jest.fn().mockResolvedValue([null, null, [null, 1], null]),
+        exec: jest.fn<() => Promise<(unknown[] | null)[]>>().mockResolvedValue([null, null, [null, 1], null]),
       })),
       get: jest.fn((k: string) => Promise.resolve(store.get(k) ?? null)),
       set: jest.fn((k: string, v: string) => { store.set(k, v); return Promise.resolve('OK'); }),
       del: jest.fn((k: string) => { store.delete(k); return Promise.resolve(1); }),
-      ping: jest.fn().mockResolvedValue('PONG'),
+      ping: jest.fn<() => Promise<string>>().mockResolvedValue('PONG'),
     },
   };
 });

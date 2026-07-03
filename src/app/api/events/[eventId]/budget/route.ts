@@ -3,7 +3,7 @@ import { eq, and, asc, sql } from 'drizzle-orm';
 import { db, budgetItems, events } from '@/lib/db';
 import { cookies } from 'next/headers';
 import { verifyAccessToken } from '@/lib/auth/jwt';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 
 async function getAuthUser() {
   const jar = await cookies();
@@ -76,9 +76,15 @@ export async function POST(
     return Response.json({ error: parsed.error.issues }, { status: 400 });
   }
 
+  const { estimatedAmount, actualAmount, ...rest } = parsed.data;
   const [item] = await db
     .insert(budgetItems)
-    .values({ eventId, ...parsed.data })
+    .values({
+      eventId,
+      ...rest,
+      estimatedAmount: String(estimatedAmount),
+      ...(actualAmount !== undefined ? { actualAmount: String(actualAmount) } : {}),
+    })
     .returning();
 
   await syncSpentBudget(eventId);
@@ -107,9 +113,15 @@ export async function PATCH(
   const allowed = itemSchema.partial().safeParse(rest);
   if (!allowed.success) return Response.json({ error: allowed.error.issues }, { status: 400 });
 
+  const { estimatedAmount: ea, actualAmount: aa, ...restAllowed } = allowed.data;
   const [updated] = await db
     .update(budgetItems)
-    .set({ ...allowed.data, updatedAt: new Date() })
+    .set({
+      ...restAllowed,
+      ...(ea !== undefined ? { estimatedAmount: String(ea) } : {}),
+      ...(aa !== undefined ? { actualAmount: String(aa) } : {}),
+      updatedAt: new Date(),
+    })
     .where(and(eq(budgetItems.id, itemId), eq(budgetItems.eventId, eventId)))
     .returning();
 

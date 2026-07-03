@@ -28,7 +28,7 @@ const config: Config = {
 
   coverageProvider: 'v8',
   coverageReporters: ['text', 'lcov', 'html'],
-  coverageThresholds: {
+  coverageThreshold: {
     global: { lines: 70, functions: 70, branches: 60 },
   },
 

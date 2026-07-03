@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { streamText } from 'ai';
-import { anthropic as aiProvider } from '@ai-sdk/anthropic';
 import { eq, and, gte, count } from 'drizzle-orm';
 import { z } from 'zod/v4';
 import { db, aiChatHistory, events, bookings, vendors, guests } from '@/lib/db';
-import { SYSTEM_PROMPT } from '@/lib/anthropic/client';
+import { groq, GROQ_MODEL, SYSTEM_PROMPT } from '@/lib/groq/client';
 import { searchSimilarVendors } from '@/lib/pinecone/embeddings';
 
 const MessageSchema = z.object({
@@ -164,7 +163,7 @@ export async function POST(req: NextRequest) {
   }));
 
   const result = streamText({
-    model: aiProvider('claude-sonnet-4-6'),
+    model: groq(GROQ_MODEL),
     system: fullSystem,
     messages: modelMessages,
     maxOutputTokens: 1000,
@@ -179,7 +178,7 @@ export async function POST(req: NextRequest) {
                 eventId:   eventId ?? null,
                 role:      'user' as const,
                 content:   userMsg.content,
-                model:     'claude-sonnet-4-6',
+                model:     GROQ_MODEL,
                 tokens:    totalUsage?.inputTokens ?? null,
                 metadata:  {} as Record<string, unknown>,
               }]
@@ -189,7 +188,7 @@ export async function POST(req: NextRequest) {
             eventId:  eventId ?? null,
             role:     'assistant' as const,
             content:  text,
-            model:    'claude-sonnet-4-6',
+            model:    GROQ_MODEL,
             tokens:   totalUsage?.outputTokens ?? null,
             metadata: {} as Record<string, unknown>,
           },

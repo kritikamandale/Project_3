@@ -1,8 +1,15 @@
+@import url('https://fonts.cdnfonts.com/css/samarkan');
 @import "tailwindcss";
 
 /* ─── Pichwai Design Tokens ─────────────────────────────────────────────── */
 
 :root {
+  /* Samarkan arch-pattern theme */
+  --font-samarkan:       'Samarkan', serif;
+  --samarkan-maroon:     #5C0A38;
+  --samarkan-arch-gold:  #C09020;
+  --samarkan-lotus-pink: #D9A0AD;
+
   /* Core Pichwai palette */
   --pichwai-dark-brown:    #2D1B00;
   --pichwai-mid-brown:     #5C3A1E;
@@ -87,9 +94,10 @@
 @theme inline {
   --color-background:  var(--background);
   --color-foreground:  var(--foreground);
-  --font-sans:  var(--font-poppins), var(--font-geist-sans);
-  --font-mono:  var(--font-geist-mono);
-  --font-serif: var(--font-playfair);
+  --font-sans:     var(--font-poppins), var(--font-geist-sans);
+  --font-mono:     var(--font-geist-mono);
+  --font-serif:    var(--font-playfair);
+  --font-samarkan: 'Samarkan', serif;
   /* Expose all Pichwai tokens as Tailwind colors */
   --color-pichwai-dark-brown:    var(--pichwai-dark-brown);
   --color-pichwai-cream:         var(--pichwai-cream);
@@ -115,15 +123,25 @@ html {
 }
 
 body {
-  background: var(--background);
+  background-color: #5C0A38;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='148'%3E%3Cpath d='M 60,0 C 90,0 120,40 120,74 C 120,108 90,148 60,148 C 30,148 0,108 0,74 C 0,40 30,0 60,0 Z' fill='none' stroke='%23C09020' stroke-width='1.8'/%3E%3Ccircle cx='60' cy='74' r='17' fill='%23700A40' opacity='0.38'/%3E%3Cg transform='translate(60,74)'%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(288)'/%3E%3Ccircle cx='0' cy='0' r='4.5' fill='%23C47888'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='148'%3E%3Cpath d='M 60,0 C 90,0 120,40 120,74 C 120,108 90,148 60,148 C 30,148 0,108 0,74 C 0,40 30,0 60,0 Z' fill='none' stroke='%23C09020' stroke-width='1.8'/%3E%3Ccircle cx='60' cy='74' r='17' fill='%23700A40' opacity='0.38'/%3E%3Cg transform='translate(60,74)'%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(288)'/%3E%3Ccircle cx='0' cy='0' r='4.5' fill='%23C47888'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 120px 148px, 120px 148px;
+  background-position: 0 0, 60px 74px;
+  background-repeat: repeat, repeat;
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-poppins), var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: 'Samarkan', var(--font-playfair), Georgia, serif;
+  font-weight: 700;
+  color: var(--pichwai-gold);
 }
 
 /* ─── Pichwai ambient background pattern ─────────────────────────────────── */
@@ -139,9 +157,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── Typography utilities ───────────────────────────────────────────────── */
 
-.font-display { font-family: var(--font-playfair), Georgia, serif; }
-.font-cinzel  { font-family: var(--font-cinzel), serif; }
-.font-poppins { font-family: var(--font-poppins), sans-serif; }
+.font-display  { font-family: 'Samarkan', var(--font-playfair), Georgia, serif; }
+.font-cinzel   { font-family: var(--font-cinzel), serif; }
+.font-poppins  { font-family: var(--font-poppins), sans-serif; }
+.font-samarkan { font-family: 'Samarkan', serif; }
+
+/* Samarkan bold gold heading — use this on any title that lives on the dark maroon bg */
+.samarkan-gold {
+  font-family: 'Samarkan', serif;
+  font-weight: 700;
+  background: linear-gradient(135deg, #EDD97A 0%, #C9933A 45%, #EDD97A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 .text-display { font-size: 4.5rem; line-height: 1.1; letter-spacing: -0.02em; }
 .text-hero    { font-size: 3rem;   line-height: 1.2; letter-spacing: -0.015em; }
@@ -283,3 +312,80 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ─── Dark Maroon Arch-Pattern Theme ─────────────────────────────────────── */
+/*
+  Override CSS variables so all elements that reference them adopt the dark
+  maroon theme. Card/surface backgrounds are intentionally kept light so
+  content cards "float" on the patterned background.
+*/
+
+:root {
+  --background:         #5C0A38;
+  --foreground:         #FFF8E7;
+  --pichwai-cream:      #5C0A38;
+  --pichwai-ivory:      #4A0830;
+  --pichwai-dark-brown: #EDD97A;
+  --pichwai-mid-brown:  #E8C4A8;
+  --muted-fg:           #C4A882;
+  --muted:              rgba(80, 8, 48, 0.55);
+  --border:             rgba(212, 160, 180, 0.25);
+  --border-gold:        rgba(192, 144, 32, 0.45);
+}
+
+/* ── Apply the arch pattern directly to every section & main ──────────────
+   background-attachment: fixed pins the tile grid to the viewport, so the
+   pattern is perfectly continuous as the user scrolls through sections.     */
+
+section,
+main {
+  background-color: #5C0A38 !important;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='148'%3E%3Cpath d='M 60,0 C 90,0 120,40 120,74 C 120,108 90,148 60,148 C 30,148 0,108 0,74 C 0,40 30,0 60,0 Z' fill='none' stroke='%23C09020' stroke-width='1.8'/%3E%3Ccircle cx='60' cy='74' r='17' fill='%23700A40' opacity='0.38'/%3E%3Cg transform='translate(60,74)'%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(288)'/%3E%3Ccircle cx='0' cy='0' r='4.5' fill='%23C47888'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='148'%3E%3Cpath d='M 60,0 C 90,0 120,40 120,74 C 120,108 90,148 60,148 C 30,148 0,108 0,74 C 0,40 30,0 60,0 Z' fill='none' stroke='%23C09020' stroke-width='1.8'/%3E%3Ccircle cx='60' cy='74' r='17' fill='%23700A40' opacity='0.38'/%3E%3Cg transform='translate(60,74)'%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(288)'/%3E%3Ccircle cx='0' cy='0' r='4.5' fill='%23C47888'/%3E%3C/g%3E%3C/svg%3E") !important;
+  background-size: 120px 148px, 120px 148px !important;
+  background-position: 0 0, 60px 74px !important;
+  background-repeat: repeat, repeat !important;
+  background-attachment: fixed !important;
+}
+
+/* Override any div using the hardcoded #FFFDF5 cream background */
+.bg-\[\#FFFDF5\] {
+  background-color: transparent !important;
+}
+
+/* Override rangoli-bg helper that paints a light gradient */
+.rangoli-bg {
+  background: transparent !important;
+}
+
+/* Public navbar: dark maroon glass */
+nav.sticky {
+  background: rgba(50, 4, 28, 0.92) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom-color: rgba(192, 144, 32, 0.3) !important;
+}
+
+/* Hide PichwaiHeroBg's hardcoded cream gradient layer */
+.from-\[\#FFF8E7\] {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* Lotus tile overlay inside hero — hide the old lotus SVG overlay */
+.absolute.inset-0.overflow-hidden.pointer-events-none > .absolute.inset-0:not(.bg-gradient-to-br) {
+  opacity: 0 !important;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+.group:hover .animate-marquee {
+  animation-play-state: paused;
+}
+

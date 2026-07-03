@@ -1,17 +1,23 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
-
 const FROM = process.env.RESEND_FROM_EMAIL ?? 'noreply@eventnest.in';
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
+
+function getResend(): Resend | null {
+  const key = process.env.RESEND_API_KEY;
+  if (!key || key.startsWith('your_')) return null;
+  return new Resend(key);
+}
 
 export async function sendVerificationEmail(
   to: string,
   name: string,
   token: string
 ): Promise<void> {
-  const link = `${APP_URL}/api/auth/verify-email?token=${token}`;
+  const resend = getResend();
+  if (!resend) return; // not configured — skip silently
 
+  const link = `${APP_URL}/api/auth/verify-email?token=${token}`;
   await resend.emails.send({
     from: FROM,
     to,
@@ -37,8 +43,10 @@ export async function sendPasswordResetEmail(
   name: string,
   token: string
 ): Promise<void> {
-  const link = `${APP_URL}/reset-password?token=${token}`;
+  const resend = getResend();
+  if (!resend) return;
 
+  const link = `${APP_URL}/reset-password?token=${token}`;
   await resend.emails.send({
     from: FROM,
     to,
@@ -60,6 +68,9 @@ export async function sendPasswordResetEmail(
 }
 
 export async function sendWelcomeEmail(to: string, name: string): Promise<void> {
+  const resend = getResend();
+  if (!resend) return;
+
   await resend.emails.send({
     from: FROM,
     to,

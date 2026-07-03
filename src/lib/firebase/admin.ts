@@ -1,7 +1,10 @@
-import admin from 'firebase-admin';
+import { initializeApp, getApps, getApp, cert } from 'firebase-admin/app';
+import { getMessaging, type Messaging } from 'firebase-admin/messaging';
+import { getFirestore, type Firestore } from 'firebase-admin/firestore';
+import type { ServiceAccount } from 'firebase-admin/app';
 
-function getApp(): admin.app.App {
-  if (admin.apps.length) return admin.apps[0]!;
+function getAdminApp() {
+  if (getApps().length) return getApp();
 
   const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
   if (!serviceAccountJson) {
@@ -10,28 +13,26 @@ function getApp(): admin.app.App {
 
   const serviceAccount = JSON.parse(
     Buffer.from(serviceAccountJson, 'base64').toString('utf-8'),
-  ) as admin.ServiceAccount;
+  ) as ServiceAccount;
 
-  return admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+  return initializeApp({
+    credential: cert(serviceAccount),
     databaseURL: process.env.FIREBASE_DATABASE_URL,
   });
 }
 
-// Lazy-init so Next.js module evaluation doesn't crash if env vars aren't set
-let _fcm: admin.messaging.Messaging | null = null;
-let _firestore: admin.firestore.Firestore | null = null;
+let _fcm: Messaging | null = null;
+let _firestore: Firestore | null = null;
 
-export function getFcmAdmin(): admin.messaging.Messaging {
-  if (!_fcm) _fcm = getApp().messaging();
+export function getFcmAdmin(): Messaging {
+  if (!_fcm) _fcm = getMessaging(getAdminApp());
   return _fcm;
 }
 
-export function getFirestoreAdmin(): admin.firestore.Firestore {
-  if (!_firestore) _firestore = getApp().firestore();
+export function getFirestoreAdmin(): Firestore {
+  if (!_firestore) _firestore = getFirestore(getAdminApp());
   return _firestore;
 }
 
-// Convenience re-exports (backward compat)
 export const fcmAdmin       = { get messaging() { return getFcmAdmin(); } };
 export const firestoreAdmin = { get firestore() { return getFirestoreAdmin(); } };

@@ -30,7 +30,7 @@ const PUBLIC_API_PREFIXES = [
 
 // Public page routes (exact match or prefix)
 const PUBLIC_PAGES = new Set(['/', '/about', '/pricing']);
-const PUBLIC_PREFIXES = ['/vendors/', '/invite/', '/checkin/'];
+const PUBLIC_PREFIXES = ['/vendors', '/invite/', '/checkin/'];
 
 // Auth pages (redirect authenticated users away)
 const AUTH_PAGES = ['/login', '/register', '/forgot-password', '/reset-password'];
@@ -102,6 +102,34 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // ── 0. Public pages — skip all auth logic entirely ─────────────────────────
+  if (isPublicPage(pathname) || isAuthPage(pathname)) {
+    // Still try to attach user context if a valid token exists, but never block
+    const quickToken = request.cookies.get('eventnest_session')?.value ?? null;
+    if (quickToken) {
+      const quickUser = await extractUser(quickToken);
+      if (quickUser && isAuthPage(pathname)) {
+        const dashboardMap: Record<string, string> = {
+          super_admin: '/admin/dashboard',
+          host:        '/host/dashboard',
+          vendor:      '/vendor/dashboard',
+          guest:       '/',
+        };
+        return NextResponse.redirect(
+          new URL(dashboardMap[quickUser.role] ?? '/', request.url)
+        );
+      }
+      if (quickUser) {
+        const response = NextResponse.next();
+        response.headers.set('x-user-id',    quickUser.sub);
+        response.headers.set('x-user-role',  quickUser.role);
+        response.headers.set('x-user-email', quickUser.email);
+        return response;
+      }
+    }
+    return NextResponse.next();
+  }
+
   const accessToken    = request.cookies.get('eventnest_session')?.value ?? null;
   const rawRefreshToken = request.cookies.get('eventnest_refresh')?.value ?? null;
 
@@ -170,33 +198,6 @@ export async function middleware(request: NextRequest) {
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-  }
-
-  // ── 5. Public pages — always allow (even authenticated) ─────────────────────
-  if (isPublicPage(pathname)) {
-    const response = NextResponse.next();
-    if (user) {
-      response.headers.set('x-user-id',    user.sub);
-      response.headers.set('x-user-role',  user.role);
-      response.headers.set('x-user-email', user.email);
-    }
-    return response;
-  }
-
-  // ── 6. Auth pages — redirect authenticated users to their dashboard ──────────
-  if (isAuthPage(pathname)) {
-    if (user) {
-      const dashboardMap: Record<string, string> = {
-        super_admin: '/admin/dashboard',
-        host:        '/host/dashboard',
-        vendor:      '/vendor/dashboard',
-        guest:       '/',
-      };
-      return NextResponse.redirect(
-        new URL(dashboardMap[user.role] ?? '/', request.url)
-      );
-    }
-    return NextResponse.next();
   }
 
   // ── 7. Dashboard routes — require auth + correct role ───────────────────────

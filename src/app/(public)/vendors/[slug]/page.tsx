@@ -6,7 +6,7 @@ import Link from 'next/link';
 import useSWR from 'swr';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Star, MapPin, Clock, BadgeCheck, ExternalLink, Instagram,
+  Star, MapPin, Clock, BadgeCheck, ExternalLink,
   Globe, Phone, ChevronDown, ChevronUp, X, ZoomIn,
 } from 'lucide-react';
 import { VENDOR_CATEGORIES } from '@/lib/constants/vendorCategories';
@@ -457,7 +457,7 @@ export default function VendorProfilePage({
                 )}
                 {vendor.instagramUrl && (
                   <a href={vendor.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-pichwai-gold-600">
-                    <Instagram className="h-4 w-4" /> Instagram
+                    <ExternalLink className="h-4 w-4" /> Instagram
                   </a>
                 )}
               </div>

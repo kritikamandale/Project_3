@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import DOMPurify from 'isomorphic-dompurify';
 
 export interface Message {
   id:      string;
@@ -44,7 +45,10 @@ function renderContent(text: string) {
       flushList();
     } else {
       flushList();
-      const inlineBold = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      const inlineBold = DOMPurify.sanitize(
+        line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'),
+        { ALLOWED_TAGS: ['strong', 'em'], ALLOWED_ATTR: [] },
+      );
       elements.push(
         <p
           key={elements.length}
