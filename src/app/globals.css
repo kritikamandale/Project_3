@@ -80,15 +80,15 @@
 }
 
 .dark {
-  --background:   #1A0F00;
+  --background:   transparent;
   --foreground:   #FFF8E7;
-  --card-bg:      #2D1B00;
-  --card:         #2D1B00;
+  --card-bg:      #2A0418;
+  --card:         #2A0418;
   --card-fg:      #FFF8E7;
-  --muted:        #4A3528;
-  --muted-fg:     #B89880;
-  --border:       #4A3528;
-  --border-gold:  rgba(201, 147, 58, 0.2);
+  --muted:        #4A0830;
+  --muted-fg:     #E8C4A8;
+  --border:       #4A0830;
+  --border-gold:  rgba(201, 147, 58, 0.4);
 }
 
 @theme inline {

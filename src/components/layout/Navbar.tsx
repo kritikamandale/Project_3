@@ -148,7 +148,7 @@ export function DashboardNavbar({ onMenuOpen }: NavbarProps) {
   const settingsHref = user?.role === 'super_admin' ? '/admin/dashboard' : '/host/settings';
 
   return (
-    <header className="sticky top-0 z-40 h-16 border-b border-[var(--border-gold)] bg-[var(--card-bg)] backdrop-blur-sm pichwai-glass">
+    <header className="sticky top-0 z-40 h-16 border-b border-[var(--border-gold)] bg-[var(--card-bg)]">
       <div className="flex h-full items-center justify-between px-4 sm:px-6">
         {/* Left: hamburger (mobile) */}
         <div className="flex items-center gap-3">
@@ -244,6 +244,7 @@ export function PublicNavbar() {
 
         <div className="hidden md:flex items-center gap-6">
           {[
+            { label: 'Home',    href: '/' },
             { label: 'Vendors', href: '/vendors' },
             { label: 'Pricing', href: '/pricing' },
             { label: 'About',   href: '/about' },

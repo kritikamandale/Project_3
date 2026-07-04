@@ -17,8 +17,8 @@ export function SuggestionChip({ label, onClick, disabled }: SuggestionChipProps
       whileTap={{ scale: disabled ? 1 : 0.97 }}
       onClick={onClick}
       disabled={disabled}
-      className="text-xs px-3 py-1.5 rounded-full border border-pichwai-gold/40 bg-pichwai-gold/5
-        text-pichwai-brown hover:bg-pichwai-gold/15 hover:border-pichwai-gold/70
+      className="text-xs px-3 py-1.5 rounded-full border border-[var(--border-gold)] bg-[var(--muted)]
+        text-[var(--foreground)] hover:bg-[rgba(201,147,58,0.15)] hover:border-[var(--pichwai-gold)]
         transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
     >
       {label}

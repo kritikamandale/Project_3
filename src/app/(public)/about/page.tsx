@@ -123,10 +123,10 @@ export default function AboutPage() {
                 <div className="w-16 h-16 rounded-full bg-[rgba(201,147,58,0.1)] flex items-center justify-center text-[var(--pichwai-gold-deep)] mb-6 border border-[rgba(201,147,58,0.3)]">
                   {val.icon}
                 </div>
-                <h3 className="font-display text-xl font-bold text-[var(--pichwai-dark-brown)] mb-4">
+                <h3 className="font-display text-xl font-bold text-[#B8860B] mb-4">
                   {val.title}
                 </h3>
-                <p className="text-[var(--pichwai-mid-brown)] leading-relaxed">
+                <p className="text-[#5C3A1E] font-medium leading-relaxed">
                   {val.description}
                 </p>
               </motion.div>

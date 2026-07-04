@@ -117,19 +117,19 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
   const remainingMessages = dailyLimit - msgCount;
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-2xl shadow-sm border border-pichwai-gold/20 overflow-hidden">
+    <div className="flex flex-col h-full bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border-gold)] overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-pichwai-gold/20 bg-gradient-to-r from-pichwai-cream/60 to-white">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border-gold)]">
         <div className="flex items-center gap-2">
           <span className="text-xl">🪔</span>
           <div>
-            <p className="font-semibold text-pichwai-brown text-sm">EventNest AI</p>
-            <p className="text-xs text-pichwai-brown/50">Your event planning assistant</p>
+            <p className="font-semibold text-[var(--foreground)] text-sm">EventNest AI</p>
+            <p className="text-xs text-[var(--muted-fg)]">Your event planning assistant</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
           {/* Token indicator */}
-          <span className="text-xs text-pichwai-brown/40">
+          <span className="text-xs text-[var(--muted-fg)]">
             {remainingMessages}/{dailyLimit} left today
           </span>
           {/* Event context selector */}
@@ -137,8 +137,8 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
             <select
               value={selectedEventId ?? ''}
               onChange={(e) => setEventId(e.target.value || undefined)}
-              className="text-xs px-2 py-1.5 rounded-lg border border-pichwai-gold/30 bg-white text-pichwai-brown
-                focus:outline-none focus:ring-1 focus:ring-pichwai-gold/50 max-w-[180px] truncate"
+              className="text-xs px-2 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--muted)] text-[var(--foreground)]
+                focus:outline-none focus:ring-1 focus:ring-[var(--ring)] max-w-[180px] truncate"
             >
               <option value="">No event context</option>
               {events.map((ev) => (
@@ -149,7 +149,7 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
           {messages.length > 0 && (
             <button
               onClick={clearConversation}
-              className="text-xs text-pichwai-brown/40 hover:text-pichwai-brown transition-colors"
+              className="text-xs text-[var(--muted-fg)] hover:text-[var(--foreground)] transition-colors"
             >
               Clear
             </button>
@@ -162,10 +162,10 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center py-12">
             <div className="text-4xl mb-4">🌸</div>
-            <h3 className="font-playfair text-lg font-semibold text-pichwai-brown mb-1">
+            <h3 className="font-playfair text-lg font-semibold text-[var(--pichwai-gold-deep)] mb-1">
               Namaste! I&apos;m EventNest AI
             </h3>
-            <p className="text-sm text-pichwai-brown/60 max-w-xs">
+            <p className="text-sm text-[var(--muted-fg)] max-w-xs">
               Ask me anything about event planning — venues, budgets, guest lists, vendors, menus, and more.
             </p>
           </div>
@@ -186,7 +186,7 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pichwai-gold to-pichwai-brown flex items-center justify-center text-sm">
               🪔
             </div>
-            <div className="bg-white border border-pichwai-gold/20 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
+            <div className="bg-[var(--muted)] border border-[var(--border)] rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
               <TypingIndicator />
             </div>
           </div>
@@ -212,8 +212,8 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
       )}
 
       {/* Input */}
-      <div className="px-4 pb-4 pt-2 border-t border-pichwai-gold/10">
-        <div className="flex gap-2 items-end bg-pichwai-cream/30 rounded-2xl border border-pichwai-gold/20 px-3 py-2">
+      <div className="px-4 pb-4 pt-2 border-t border-[var(--border)]">
+        <div className="flex gap-2 items-end bg-[var(--muted)] rounded-2xl border border-[var(--border)] px-3 py-2">
           <textarea
             ref={inputRef}
             value={input}
@@ -226,7 +226,7 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
             }
             disabled={isLoading || remainingMessages <= 0}
             rows={1}
-            className="flex-1 resize-none bg-transparent text-pichwai-brown placeholder-pichwai-brown/40
+            className="flex-1 resize-none bg-transparent text-[var(--foreground)] placeholder-[var(--muted-fg)]
               text-sm focus:outline-none min-h-[24px] max-h-32 py-1 disabled:opacity-50"
             style={{ height: 'auto' }}
             onInput={(e) => {
@@ -252,7 +252,7 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
             )}
           </motion.button>
         </div>
-        <p className="text-center text-[10px] text-pichwai-brown/30 mt-1.5">
+        <p className="text-center text-[10px] text-[var(--muted-fg)] mt-1.5">
           Press Enter to send · Shift+Enter for new line
         </p>
       </div>

@@ -143,12 +143,17 @@ export async function middleware(request: NextRequest) {
   // ── 2. Silent refresh — access token expired but refresh token exists ───────
   if (!user && rawRefreshToken) {
     const refreshUrl = new URL('/api/auth/refresh', request.url);
-    const refreshRes = await fetch(refreshUrl.toString(), {
-      method:  'POST',
-      headers: { cookie: request.headers.get('cookie') ?? '' },
-    });
+    let refreshRes: Response | null = null;
+    try {
+      refreshRes = await fetch(refreshUrl.toString(), {
+        method:  'POST',
+        headers: { cookie: request.headers.get('cookie') ?? '' },
+      });
+    } catch (e) {
+      console.error('Middleware self-fetch failed:', e);
+    }
 
-    if (refreshRes.ok) {
+    if (refreshRes && refreshRes.ok) {
       // Build the response and copy the Set-Cookie headers from the refresh call
       const response = NextResponse.next();
       const setCookies = refreshRes.headers.getSetCookie?.() ?? [];

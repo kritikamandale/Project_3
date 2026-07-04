@@ -95,10 +95,10 @@ function Step1EventType({ form }: { form: UseFormReturn<WizardFormData> }) {
 
   return (
     <div>
-      <h2 className="font-playfair text-2xl font-bold text-pichwai-brown mb-1">
+      <h2 className="font-playfair text-2xl font-bold mb-1" style={{ color: '#2D1B00' }}>
         What are you celebrating?
       </h2>
-      <p className="text-sm text-pichwai-brown/60 mb-6">
+      <p className="text-sm mb-6" style={{ color: '#5C3A1E' }}>
         Select the type of event you're planning
       </p>
 
@@ -113,11 +113,11 @@ function Step1EventType({ form }: { form: UseFormReturn<WizardFormData> }) {
               'p-3 rounded-xl border-2 text-center transition-all cursor-pointer select-none',
               selected === et.value
                 ? 'border-pichwai-gold bg-pichwai-gold/10 shadow-md'
-                : 'border-gray-200 hover:border-pichwai-gold/50 hover:bg-pichwai-cream/40',
+                : 'border-[#5C0A38]/30 hover:border-pichwai-gold/50 hover:bg-pichwai-cream/40',
             )}
           >
             <div className="text-2xl mb-1">{et.icon}</div>
-            <div className="text-xs font-medium text-pichwai-brown leading-tight">{et.label}</div>
+            <div className="text-xs font-medium text-[#5C0A38] leading-tight">{et.label}</div>
           </motion.button>
         ))}
       </div>
@@ -146,23 +146,23 @@ function Step2BasicDetails({
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="font-playfair text-2xl font-bold text-pichwai-brown mb-1">
+        <h2 className="font-playfair text-2xl font-bold mb-1" style={{ color: '#2D1B00' }}>
           Basic Details
         </h2>
-        <p className="text-sm text-pichwai-brown/60 mb-6">Tell us about your event</p>
+        <p className="text-sm mb-6" style={{ color: '#5C3A1E' }}>Tell us about your event</p>
       </div>
 
       {/* Event title */}
       <div>
-        <label className="block text-sm font-medium text-pichwai-brown mb-1">
+        <label className="block text-sm font-medium text-[#5C0A38] mb-1">
           Event Title <span className="text-red-500">*</span>
         </label>
         <input
           {...register('title')}
           placeholder="e.g. Sharma Family Wedding 2026"
           className={cn(
-            'w-full px-4 py-2.5 rounded-xl border bg-white text-pichwai-brown placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40',
-            errors.title ? 'border-red-400' : 'border-gray-200',
+            'w-full px-4 py-2.5 rounded-xl border bg-white/90 text-[#5C0A38] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40',
+            errors.title ? 'border-red-400' : 'border-[#5C0A38]/30',
           )}
         />
         {errors.title && <p className="mt-1 text-xs text-red-500">{errors.title.message}</p>}
@@ -170,21 +170,21 @@ function Step2BasicDetails({
 
       {/* Description */}
       <div>
-        <label className="block text-sm font-medium text-pichwai-brown mb-1">
+        <label className="block text-sm font-medium text-[#5C0A38] mb-1">
           Description
         </label>
         <textarea
           {...register('description')}
           rows={3}
           placeholder="Share details about your event, what guests can expect..."
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40 resize-none"
+          className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40 resize-none"
         />
       </div>
 
       {/* Guest count + dresscode row */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-pichwai-brown mb-1">
+          <label className="block text-sm font-medium text-[#5C0A38] mb-1">
             Expected Guests <span className="text-red-500">*</span>
           </label>
           <input
@@ -194,8 +194,8 @@ function Step2BasicDetails({
             max={100000}
             placeholder="50"
             className={cn(
-              'w-full px-4 py-2.5 rounded-xl border bg-white text-pichwai-brown focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40',
-              errors.expectedGuests ? 'border-red-400' : 'border-gray-200',
+              'w-full px-4 py-2.5 rounded-xl border bg-white/90 text-[#5C0A38] focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40',
+              errors.expectedGuests ? 'border-red-400' : 'border-[#5C0A38]/30',
             )}
           />
           {errors.expectedGuests && (
@@ -204,30 +204,30 @@ function Step2BasicDetails({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-pichwai-brown mb-1">
+          <label className="block text-sm font-medium text-[#5C0A38] mb-1">
             Dress Code
           </label>
           <input
             {...register('dresscode')}
             placeholder="e.g. Indian Traditional"
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
           />
         </div>
       </div>
 
       {/* Theme */}
       <div>
-        <label className="block text-sm font-medium text-pichwai-brown mb-1">Theme</label>
+        <label className="block text-sm font-medium text-[#5C0A38] mb-1">Theme</label>
         <input
           {...register('theme')}
           placeholder="e.g. Royal Rajasthani, Garden Party, Pichwai Art..."
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+          className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
         />
       </div>
 
       {/* Cover image upload */}
       <div>
-        <label className="block text-sm font-medium text-pichwai-brown mb-2">
+        <label className="block text-sm font-medium text-[#5C0A38] mb-2">
           Cover Image
         </label>
         {coverImageUrl ? (
@@ -237,7 +237,7 @@ function Step2BasicDetails({
             <button
               type="button"
               onClick={() => form.setValue('coverImageUrl', '')}
-              className="absolute top-2 right-2 bg-white/80 text-red-500 rounded-lg px-2 py-1 text-xs font-medium"
+              className="absolute top-2 right-2 bg-white/90/80 text-red-500 rounded-lg px-2 py-1 text-xs font-medium"
             >
               Remove
             </button>
@@ -247,7 +247,7 @@ function Step2BasicDetails({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={uploadingImage}
-            className="w-full h-28 border-2 border-dashed border-pichwai-gold/30 rounded-xl flex flex-col items-center justify-center text-pichwai-brown/50 hover:border-pichwai-gold/60 hover:text-pichwai-brown transition-colors"
+            className="w-full h-28 border-2 border-dashed border-pichwai-gold/30 rounded-xl flex flex-col items-center justify-center text-[#5C0A38]/50 hover:border-pichwai-gold/60 hover:text-[#5C0A38] transition-colors"
           >
             {uploadingImage ? (
               <span className="text-sm">Uploading…</span>
@@ -286,14 +286,14 @@ function Step2BasicDetails({
             >
               <span
                 className={cn(
-                  'absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform',
+                  'absolute top-0.5 left-0.5 w-4 h-4 bg-white/90 rounded-full shadow transition-transform',
                   field.value ? 'translate-x-5' : 'translate-x-0',
                 )}
               />
             </button>
           )}
         />
-        <span className="text-sm text-pichwai-brown">
+        <span className="text-sm text-[#5C0A38]">
           Private event (guests join via invite link only)
         </span>
       </div>
@@ -315,24 +315,24 @@ function Step3DateVenue({ form }: { form: UseFormReturn<WizardFormData> }) {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="font-playfair text-2xl font-bold text-pichwai-brown mb-1">
+        <h2 className="font-playfair text-2xl font-bold mb-1" style={{ color: '#2D1B00' }}>
           Date & Venue
         </h2>
-        <p className="text-sm text-pichwai-brown/60 mb-6">When and where is the event?</p>
+        <p className="text-sm mb-6" style={{ color: '#5C3A1E' }}>When and where is the event?</p>
       </div>
 
       {/* Dates */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-pichwai-brown mb-1">
+          <label className="block text-sm font-medium text-[#5C0A38] mb-1">
             Event Date <span className="text-red-500">*</span>
           </label>
           <input
             type="date"
             {...register('eventDate')}
             className={cn(
-              'w-full px-4 py-2.5 rounded-xl border bg-white text-pichwai-brown focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40',
-              errors.eventDate ? 'border-red-400' : 'border-gray-200',
+              'w-full px-4 py-2.5 rounded-xl border bg-white/90 text-[#5C0A38] focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40',
+              errors.eventDate ? 'border-red-400' : 'border-[#5C0A38]/30',
             )}
           />
           {errors.eventDate && (
@@ -341,89 +341,89 @@ function Step3DateVenue({ form }: { form: UseFormReturn<WizardFormData> }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-pichwai-brown mb-1">
+          <label className="block text-sm font-medium text-[#5C0A38] mb-1">
             Start Time
           </label>
           <input
             type="time"
             {...register('eventTime')}
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-pichwai-brown mb-1">
+          <label className="block text-sm font-medium text-[#5C0A38] mb-1">
             End Date (optional)
           </label>
           <input
             type="date"
             {...register('endDate')}
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-pichwai-brown mb-1">
+          <label className="block text-sm font-medium text-[#5C0A38] mb-1">
             End Time
           </label>
           <input
             type="time"
             {...register('endTime')}
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
           />
         </div>
       </div>
 
       {/* Venue */}
       <div>
-        <label className="block text-sm font-medium text-pichwai-brown mb-1">
+        <label className="block text-sm font-medium text-[#5C0A38] mb-1">
           Venue Name
         </label>
         <input
           {...register('venueName')}
           placeholder="e.g. The Grand Ballroom, Taj Hotel, Home"
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+          className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-pichwai-brown mb-1">
+        <label className="block text-sm font-medium text-[#5C0A38] mb-1">
           Full Address
         </label>
         <textarea
           {...register('venueAddress')}
           rows={2}
           placeholder="Street, Colony, Landmark..."
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40 resize-none"
+          className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40 resize-none"
         />
       </div>
 
       <div className="grid grid-cols-3 gap-4">
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-pichwai-brown mb-1">City</label>
+          <label className="block text-sm font-medium text-[#5C0A38] mb-1">City</label>
           <input
             {...register('venueCity')}
             placeholder="e.g. Mumbai, Delhi, Jaipur"
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-pichwai-brown mb-1">Pincode</label>
+          <label className="block text-sm font-medium text-[#5C0A38] mb-1">Pincode</label>
           <input
             {...register('venuePincode')}
             maxLength={6}
             placeholder="400001"
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-pichwai-brown mb-1">State</label>
+        <label className="block text-sm font-medium text-[#5C0A38] mb-1">State</label>
         <select
           {...register('venueState')}
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-pichwai-brown focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
+          className="w-full px-4 py-2.5 rounded-xl border border-[#5C0A38]/30 bg-white/90 text-[#5C0A38] focus:outline-none focus:ring-2 focus:ring-pichwai-gold/40"
         >
           <option value="">Select state…</option>
           {INDIAN_STATES.map((s) => (
@@ -460,10 +460,10 @@ function Step4Budget({
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="font-playfair text-2xl font-bold text-pichwai-brown mb-1">
+        <h2 className="font-playfair text-2xl font-bold mb-1" style={{ color: '#2D1B00' }}>
           Budget Planning
         </h2>
-        <p className="text-sm text-pichwai-brown/60 mb-6">
+        <p className="text-sm mb-6" style={{ color: '#5C3A1E' }}>
           Set your total budget and allocate across categories
         </p>
       </div>
@@ -471,8 +471,8 @@ function Step4Budget({
       {/* Total budget slider */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <label className="text-sm font-medium text-pichwai-brown">Total Budget</label>
-          <span className="text-lg font-bold text-pichwai-gold">
+          <label className="text-sm font-medium text-[#5C0A38]">Total Budget</label>
+          <span className="text-lg font-bold" style={{ color: '#2D1B00' }}>
             {formatCurrency(totalBudget)}
           </span>
         </div>
@@ -488,10 +488,10 @@ function Step4Budget({
           <SliderPrimitive.Track className="bg-gray-200 relative grow rounded-full h-2">
             <SliderPrimitive.Range className="absolute bg-gradient-to-r from-pichwai-saffron to-pichwai-gold rounded-full h-full" />
           </SliderPrimitive.Track>
-          <SliderPrimitive.Thumb className="block w-5 h-5 bg-white border-2 border-pichwai-gold rounded-full shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-pichwai-gold/50 transition-shadow" />
+          <SliderPrimitive.Thumb className="block w-5 h-5 bg-white/90 border-2 border-pichwai-gold rounded-full shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-pichwai-gold/50 transition-shadow" />
         </SliderPrimitive.Root>
 
-        <div className="flex justify-between text-xs text-gray-400 mt-1">
+        <div className="flex justify-between text-xs text-[#5C0A38]/70 mt-1">
           <span>₹5K</span>
           <span>₹50L</span>
         </div>
@@ -508,17 +508,17 @@ function Step4Budget({
                   className="w-3 h-3 rounded-full flex-shrink-0"
                   style={{ backgroundColor: CHART_COLORS[i % CHART_COLORS.length] }}
                 />
-                <span className="text-xs text-pichwai-brown flex-1 truncate">{cat.name}</span>
+                <span className="text-xs text-[#5C0A38] flex-1 truncate">{cat.name}</span>
                 <input
                   type="number"
                   value={cat.percentage}
                   min={0}
                   max={100}
                   onChange={(e) => updatePct(i, Number(e.target.value))}
-                  className="w-14 text-center text-xs border border-gray-200 rounded-lg py-1 focus:outline-none focus:ring-1 focus:ring-pichwai-gold/40"
+                  className="w-14 text-center text-xs border border-[#5C0A38]/30 rounded-lg py-1 focus:outline-none focus:ring-1 focus:ring-pichwai-gold/40"
                 />
-                <span className="text-xs text-gray-400 w-4">%</span>
-                <span className="text-xs font-medium text-pichwai-brown w-14 text-right">
+                <span className="text-xs text-[#5C0A38]/70 w-4">%</span>
+                <span className="text-xs font-medium text-[#5C0A38] w-14 text-right">
                   {formatCurrency(Math.round((cat.percentage / 100) * totalBudget))}
                 </span>
               </div>
@@ -556,10 +556,10 @@ function Step5Review({
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="font-playfair text-2xl font-bold text-pichwai-brown mb-1">
+        <h2 className="font-playfair text-2xl font-bold mb-1" style={{ color: '#2D1B00' }}>
           Review Your Event
         </h2>
-        <p className="text-sm text-pichwai-brown/60 mb-6">
+        <p className="text-sm mb-6" style={{ color: '#5C3A1E' }}>
           Everything looks good? Save as draft or publish to go live.
         </p>
       </div>
@@ -573,7 +573,7 @@ function Step5Review({
               <span>{eventTypeInfo?.icon}</span>
               <span className="font-medium">{values.title || '—'}</span>
               {eventTypeInfo && (
-                <span className="text-xs bg-pichwai-gold/10 text-pichwai-gold px-2 py-0.5 rounded-full">
+                <span className="text-xs bg-pichwai-gold/10 px-2 py-0.5 rounded-full" style={{ color: '#2D1B00' }}>
                   {eventTypeInfo.label}
                 </span>
               )}
@@ -606,7 +606,7 @@ function Step5Review({
         <ReviewRow
           label="Total Budget"
           value={
-            <span className="font-semibold text-pichwai-gold">
+            <span className="font-semibold" style={{ color: '#2D1B00' }}>
               {formatCurrency(values.totalBudget ?? 0)}
             </span>
           }
@@ -641,8 +641,8 @@ function Step5Review({
         )}
       </div>
 
-      <div className="bg-pichwai-cream/60 rounded-xl p-4 text-sm text-pichwai-brown/70">
-        <p className="font-medium text-pichwai-brown mb-1">What happens next?</p>
+      <div className="rounded-xl p-4 text-sm" style={{ backgroundColor: 'rgba(255, 255, 255, 0.4)', color: 'rgba(45, 27, 0, 0.8)' }}>
+        <p className="font-medium mb-1" style={{ color: '#2D1B00' }}>What happens next?</p>
         <ul className="space-y-1 list-disc list-inside">
           <li>Your event checklist will be auto-generated from the template</li>
           <li>A unique invite link & QR code will be created</li>
@@ -662,8 +662,8 @@ function ReviewRow({
 }) {
   return (
     <div className="flex items-start gap-3 py-2 border-b border-gray-100 last:border-0">
-      <span className="text-xs text-gray-400 w-28 flex-shrink-0 pt-0.5">{label}</span>
-      <span className="text-sm text-pichwai-brown flex-1">{value}</span>
+      <span className="text-xs w-28 flex-shrink-0 pt-0.5" style={{ color: 'rgba(92, 10, 56, 0.8)' }}>{label}</span>
+      <span className="text-sm flex-1" style={{ color: '#2D1B00' }}>{value}</span>
     </div>
   );
 }
@@ -824,7 +824,7 @@ export default function EventWizard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pichwai-cream/40 via-white to-pichwai-cream/20 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#5C0A38]/95 via-[#7A0D4A]/80 to-[#3A0623]/95 py-8">
       <div className="max-w-2xl mx-auto px-4">
 
         {/* Progress indicator */}
@@ -838,14 +838,14 @@ export default function EventWizard() {
                       'w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all',
                       i < step  ? 'bg-pichwai-gold text-white shadow-md'       :
                       i === step ? 'bg-pichwai-saffron text-white ring-4 ring-pichwai-saffron/20' :
-                      'bg-gray-100 text-gray-400',
+                      'bg-[#D4AF37]/10 text-[#D4AF37]/70',
                     )}
                   >
                     {i < step ? '✓' : i + 1}
                   </div>
                   <span className={cn(
                     'text-xs mt-1 hidden sm:block',
-                    i === step ? 'text-pichwai-saffron font-medium' : 'text-gray-400',
+                    i === step ? 'text-pichwai-saffron font-medium' : 'text-[#D4AF37]/70',
                   )}>
                     {s}
                   </span>
@@ -854,7 +854,7 @@ export default function EventWizard() {
                   <div
                     className={cn(
                       'flex-1 h-0.5 mx-2 mt-[-1rem] sm:mt-[-1.4rem] transition-colors',
-                      i < step ? 'bg-pichwai-gold' : 'bg-gray-200',
+                      i < step ? 'bg-pichwai-gold' : 'bg-[#5C0A38]/20',
                     )}
                   />
                 )}
@@ -864,7 +864,7 @@ export default function EventWizard() {
         </div>
 
         {/* Step card */}
-        <div className="bg-white rounded-2xl shadow-[0_4px_24px_rgba(62,32,0,0.08)] overflow-hidden">
+        <div className="bg-gradient-to-r from-[#D4AF37] to-[#E8C06B] border border-[#B8860B] rounded-2xl shadow-xl overflow-hidden">
           <div className="overflow-hidden">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
@@ -902,12 +902,12 @@ export default function EventWizard() {
           </div>
 
           {/* Navigation bar */}
-          <div className="px-6 sm:px-8 pb-6 flex items-center justify-between border-t border-gray-50 pt-4">
+          <div className="px-6 sm:px-8 pb-6 flex items-center justify-between border-t border-[#5C0A38]/20 pt-4">
             <button
               type="button"
               onClick={goPrev}
               className={cn(
-                'px-5 py-2.5 rounded-xl border border-gray-200 text-pichwai-brown text-sm font-medium hover:bg-gray-50 transition-colors',
+                'px-5 py-2.5 rounded-xl border border-[#5C0A38]/30 text-[#5C0A38] text-sm font-medium hover:bg-[#5C0A38]/10 transition-colors',
                 step === 0 && 'invisible',
               )}
             >
@@ -928,7 +928,7 @@ export default function EventWizard() {
                   type="button"
                   onClick={() => handleSubmit('draft')}
                   disabled={isSubmitting}
-                  className="px-5 py-2.5 rounded-xl border border-pichwai-gold text-pichwai-brown text-sm font-medium hover:bg-pichwai-gold/5 disabled:opacity-50 transition-colors"
+                  className="px-5 py-2.5 rounded-xl border border-pichwai-gold text-[#5C0A38] text-sm font-medium hover:bg-pichwai-gold/5 disabled:opacity-50 transition-colors"
                 >
                   Save Draft
                 </button>
@@ -947,7 +947,7 @@ export default function EventWizard() {
         </div>
 
         {/* Clear draft link */}
-        <p className="text-center mt-4 text-xs text-gray-400">
+        <p className="text-center mt-4 text-xs text-[#D4AF37]/70">
           Draft auto-saved.{' '}
           <button
             type="button"
@@ -957,7 +957,7 @@ export default function EventWizard() {
               setBudgetCategories([]);
               setStep(0);
             }}
-            className="underline hover:text-pichwai-brown transition-colors"
+            className="underline hover:text-[#D4AF37] transition-colors"
           >
             Clear draft
           </button>

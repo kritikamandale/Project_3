@@ -212,18 +212,18 @@ export default function HostDashboardPage() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <motion.div {...fadeUp(0)} className="flex items-start justify-between">
+      <motion.div {...fadeUp(0)} className="flex items-start justify-between bg-gradient-to-r from-[#D4AF37] to-[#E8C06B] p-6 rounded-xl shadow-md border border-[#B8860B] mb-6">
         <div>
-          <h1 className="text-2xl font-cinzel font-bold text-[var(--pichwai-gold-deep)]">
+          <h1 className="text-2xl font-cinzel font-bold text-[#5C0A38] !text-[#5C0A38]" style={{ color: '#5C0A38' }}>
             Namaste{user?.name ? `, ${user.name.split(' ')[0]}` : ''} 🙏
           </h1>
-          <p className="text-sm text-[var(--muted-fg)] mt-1">
+          <p className="text-sm text-[#5C0A38]/90 mt-1 font-medium">
             {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
         </div>
         <Link
           href="/host/events/new"
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-[#C9933A] to-[#E8C06B] hover:opacity-90 transition shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#5C0A38] hover:bg-[#3d0624] transition shadow-sm"
         >
           <Plus className="h-4 w-4" /> New Event
         </Link>
@@ -233,9 +233,9 @@ export default function HostDashboardPage() {
       <motion.div {...fadeUp(0.05)} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'My Events',    value: loading ? '—' : events.length,                 icon: CalendarDays, color: 'text-[var(--pichwai-gold)]', bg: 'bg-[rgba(201,147,58,0.1)]' },
-          { label: 'Upcoming',     value: loading ? '—' : upcoming.length,                icon: TrendingUp,   color: 'text-blue-500',              bg: 'bg-blue-50' },
-          { label: 'Total Guests', value: loading ? '—' : totalGuests.toLocaleString(),   icon: Users,        color: 'text-green-600',             bg: 'bg-green-50' },
-          { label: 'Budget Spent', value: loading ? '—' : formatCurrency(totalSpent),     icon: Wallet,       color: 'text-purple-600',            bg: 'bg-purple-50' },
+          { label: 'Upcoming',     value: loading ? '—' : upcoming.length,                icon: TrendingUp,   color: 'text-blue-400',              bg: 'bg-blue-500/10' },
+          { label: 'Total Guests', value: loading ? '—' : totalGuests.toLocaleString(),   icon: Users,        color: 'text-green-400',             bg: 'bg-green-500/10' },
+          { label: 'Budget Spent', value: loading ? '—' : formatCurrency(totalSpent),     icon: Wallet,       color: 'text-purple-400',            bg: 'bg-purple-500/10' },
         ].map((s) => {
           const Icon = s.icon;
           return (
@@ -329,7 +329,7 @@ export default function HostDashboardPage() {
               <AlertTriangle className="h-4 w-4 text-[var(--pichwai-gold)]" />
               Alerts
               {alerts.length > 0 && (
-                <span className="text-xs bg-red-100 text-red-600 px-1.5 py-0.5 rounded-full font-bold">{alerts.length}</span>
+                <span className="text-xs bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded-full font-bold">{alerts.length}</span>
               )}
             </h2>
           </div>
@@ -344,7 +344,7 @@ export default function HostDashboardPage() {
             ) : (
               alerts.map((alert, i) => {
                 const Icon = alert.type === 'error' ? AlertTriangle : alert.type === 'warning' ? AlertTriangle : Info;
-                const color = alert.type === 'error' ? 'text-red-500 bg-red-50' : alert.type === 'warning' ? 'text-orange-500 bg-orange-50' : 'text-blue-500 bg-blue-50';
+                const color = alert.type === 'error' ? 'text-red-400 bg-red-500/10' : alert.type === 'warning' ? 'text-orange-400 bg-orange-500/10' : 'text-blue-400 bg-blue-500/10';
                 return (
                   <div key={i} className="flex items-start gap-3 px-5 py-3 hover:bg-[rgba(201,147,58,0.03)] transition">
                     <div className={`p-1 rounded-full shrink-0 mt-0.5 ${color}`}>
@@ -399,7 +399,7 @@ export default function HostDashboardPage() {
               const checklistDone   = (event.checklist ?? []).filter((t) => t.completed).length;
               const taskPct         = checklistTotal > 0 ? Math.round((checklistDone / checklistTotal) * 100) : 0;
               const dlLabel = dl <= 0 ? 'Today!' : dl === 1 ? '1 day left' : `${dl} days left`;
-              const dlColor = dl <= 3 ? 'text-red-600 bg-red-50' : dl <= 7 ? 'text-orange-600 bg-orange-50' : 'text-[var(--pichwai-gold-deep)] bg-[rgba(201,147,58,0.1)]';
+              const dlColor = dl <= 3 ? 'text-red-400 bg-red-500/10' : dl <= 7 ? 'text-orange-400 bg-orange-500/10' : 'text-[var(--pichwai-gold-deep)] bg-[rgba(201,147,58,0.1)]';
 
               return (
                 <Link
@@ -505,10 +505,10 @@ export default function HostDashboardPage() {
                   const type = EVENT_TYPES.find((t) => t.value === event.eventType);
                   const STATUS_STYLES: Record<string, string> = {
                     draft: 'bg-[rgba(201,147,58,0.12)] text-[var(--pichwai-gold-deep)]',
-                    published: 'bg-blue-50 text-blue-700',
-                    ongoing: 'bg-green-50 text-green-700',
-                    completed: 'bg-purple-50 text-purple-700',
-                    cancelled: 'bg-red-50 text-red-600',
+                    published: 'bg-blue-500/10 text-blue-400',
+                    ongoing: 'bg-green-500/10 text-green-400',
+                    completed: 'bg-purple-500/10 text-purple-400',
+                    cancelled: 'bg-red-500/10 text-red-400',
                   };
                   return (
                     <tr key={event.id} className="hover:bg-[rgba(201,147,58,0.03)] transition group">

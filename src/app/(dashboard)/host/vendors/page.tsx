@@ -42,8 +42,8 @@ export default function HostVendorsPage() {
       if (cat !== 'all') p.set('category', cat);
       if (q)             p.set('search', q);
       const res  = await fetch(`/api/vendors?${p}`);
-      const data = await res.json() as { vendors?: Vendor[] };
-      setVendors(Array.isArray(data?.vendors) ? data.vendors : []);
+      const data = await res.json() as { items?: Vendor[] };
+      setVendors(Array.isArray(data?.items) ? data.items : []);
     } catch {
       setVendors([]);
     } finally {

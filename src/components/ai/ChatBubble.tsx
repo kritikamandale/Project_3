@@ -85,7 +85,7 @@ export function ChatBubble({ message, isStreaming }: ChatBubbleProps) {
         className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-sm
           ${isUser
             ? 'bg-gradient-to-br from-pichwai-saffron to-pichwai-gold text-white rounded-tr-sm'
-            : 'bg-white border border-pichwai-gold/20 text-pichwai-brown rounded-tl-sm'
+            : 'bg-[var(--muted)] border border-[var(--border)] text-[var(--foreground)] rounded-tl-sm'
           }`}
       >
         {isStreaming && !message.content ? (

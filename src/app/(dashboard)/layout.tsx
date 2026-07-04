@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[var(--background)]">
+    <div className="dark flex h-screen overflow-hidden bg-transparent text-[var(--foreground)]">
 
       {/* ── Desktop sidebar (always visible lg+) ────────────────────── */}
       <div className="hidden lg:flex lg:shrink-0">

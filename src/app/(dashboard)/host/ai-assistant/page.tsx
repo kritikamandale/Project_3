@@ -26,15 +26,15 @@ export default function AIAssistantPage() {
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2 }}
-        className="mb-6 flex-shrink-0"
+        className="mb-6 flex-shrink-0 bg-gradient-to-r from-[#D4AF37] to-[#E8C06B] p-6 rounded-xl shadow-md border border-[#B8860B]"
       >
         <div className="flex items-center gap-3">
           <span className="text-3xl">🪔</span>
           <div>
-            <h1 className="font-playfair text-2xl font-bold text-pichwai-brown">
+            <h1 className="font-playfair text-2xl font-bold" style={{ color: '#5C0A38' }}>
               AI Planning Assistant
             </h1>
-            <p className="text-sm text-pichwai-brown/60">
+            <p className="text-sm font-medium" style={{ color: '#5C0A38', opacity: 0.9 }}>
               Your warm, knowledgeable event planning companion
             </p>
           </div>
@@ -51,7 +51,8 @@ export default function AIAssistantPage() {
           ].map((feature) => (
             <span
               key={feature}
-              className="text-xs px-3 py-1 rounded-full bg-pichwai-gold/10 text-pichwai-brown/70 border border-pichwai-gold/20"
+              className="text-xs px-3 py-1 rounded-full font-medium border"
+              style={{ backgroundColor: 'rgba(92, 10, 56, 0.1)', color: '#5C0A38', borderColor: 'rgba(92, 10, 56, 0.3)' }}
             >
               {feature}
             </span>
@@ -64,8 +65,8 @@ export default function AIAssistantPage() {
         {/* Chat — takes 2/3 on desktop */}
         <div className="lg:col-span-2 flex flex-col min-h-[600px] lg:min-h-0">
           {loading ? (
-            <div className="flex-1 flex items-center justify-center bg-white rounded-2xl border border-pichwai-gold/20">
-              <div className="text-pichwai-brown/40 text-sm">Loading…</div>
+            <div className="flex-1 flex items-center justify-center bg-[var(--card-bg)] rounded-2xl border border-[var(--border-gold)]">
+              <div className="text-[var(--muted-fg)] text-sm">Loading…</div>
             </div>
           ) : (
             <AIAssistant events={events} />
@@ -79,10 +80,10 @@ export default function AIAssistantPage() {
             initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.2 }}
-            className="bg-white rounded-2xl border border-pichwai-gold/20 p-5"
+            className="bg-[var(--card-bg)] rounded-2xl border border-[var(--border-gold)] p-5"
           >
-            <h3 className="font-semibold text-pichwai-brown mb-3 text-sm">💡 What you can ask</h3>
-            <ul className="space-y-2 text-xs text-pichwai-brown/70">
+            <h3 className="font-semibold text-[var(--foreground)] mb-3 text-sm">💡 What you can ask</h3>
+            <ul className="space-y-2 text-xs text-[var(--muted-fg)]">
               <li className="flex items-start gap-2">
                 <span className="text-pichwai-gold mt-0.5">•</span>
                 &quot;Plan a Rajasthani wedding for 300 guests under ₹15 lakhs&quot;
@@ -111,18 +112,18 @@ export default function AIAssistantPage() {
             initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.2, delay: 0.05 }}
-            className="bg-gradient-to-br from-pichwai-saffron/10 to-pichwai-gold/10 rounded-2xl border border-pichwai-gold/20 p-5"
+            className="bg-[var(--card-bg)] rounded-2xl border border-[var(--border-gold)] p-5"
           >
-            <h3 className="font-semibold text-pichwai-brown mb-2 text-sm">📊 Your Plan</h3>
+            <h3 className="font-semibold text-[var(--foreground)] mb-2 text-sm">📊 Your Plan</h3>
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-xs text-pichwai-brown/70">Daily messages</span>
-                <span className="text-xs font-medium text-pichwai-brown">20 / day (Free)</span>
+                <span className="text-xs text-[var(--muted-fg)]">Daily messages</span>
+                <span className="text-xs font-medium text-[var(--foreground)]">20 / day (Free)</span>
               </div>
-              <div className="w-full h-1.5 bg-pichwai-gold/20 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-pichwai-saffron to-pichwai-gold w-0 rounded-full transition-all" />
+              <div className="w-full h-1.5 bg-[var(--muted)] rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-[#C9933A] to-[#E8C06B] w-0 rounded-full transition-all" />
               </div>
-              <p className="text-[10px] text-pichwai-brown/40">
+              <p className="text-[10px] text-[var(--muted-fg)]">
                 Upgrade to Premium for unlimited AI messages + priority responses
               </p>
             </div>
@@ -133,12 +134,12 @@ export default function AIAssistantPage() {
             initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.2, delay: 0.1 }}
-            className="bg-white rounded-2xl border border-pichwai-gold/20 p-5"
+            className="bg-[var(--card-bg)] rounded-2xl border border-[var(--border-gold)] p-5"
           >
-            <h3 className="font-semibold text-pichwai-brown mb-3 text-sm">🎊 Specialities</h3>
+            <h3 className="font-semibold text-[var(--foreground)] mb-3 text-sm">🎊 Specialities</h3>
             <div className="grid grid-cols-2 gap-2">
               {['💍 Weddings', '🎂 Birthdays', '👶 Baby Showers', '🏠 Griha Pravesh', '🎓 Graduation', '💐 Engagement'].map((event) => (
-                <span key={event} className="text-xs text-pichwai-brown/70 bg-pichwai-cream/50 rounded-lg px-2 py-1.5">
+                <span key={event} className="text-xs text-[var(--pichwai-gold)] bg-[var(--muted)] border border-[var(--border)] rounded-lg px-2 py-1.5">
                   {event}
                 </span>
               ))}

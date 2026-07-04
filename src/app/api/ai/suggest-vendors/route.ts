@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { eq, inArray } from 'drizzle-orm';
 import { z } from 'zod/v4';
+import { generateText } from 'ai';
 import { db, vendors } from '@/lib/db';
 import { groq, GROQ_MODEL, SYSTEM_PROMPT } from '@/lib/groq/client';
 import { searchSimilarVendors } from '@/lib/pinecone/embeddings';
@@ -98,16 +99,11 @@ export async function POST(req: NextRequest) {
     'Focus on the most relevant ones. Do NOT invent vendors not listed above.',
   ].join('');
 
-  const completion = await groq.chat.completions.create({
-    model: GROQ_MODEL,
-    max_tokens: 400,
-    messages: [
-      { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: prompt },
-    ],
+  const { text: recommendation } = await generateText({
+    model: groq(GROQ_MODEL),
+    system: SYSTEM_PROMPT,
+    prompt: prompt,
   });
-
-  const recommendation = completion.choices[0]?.message?.content ?? '';
 
   return NextResponse.json({
     recommendations: recommendation,

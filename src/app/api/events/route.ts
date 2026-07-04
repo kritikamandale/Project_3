@@ -219,13 +219,14 @@ export async function POST(request: NextRequest) {
       isPrivate:           data.isPrivate,
       inviteToken,
       templateId:          data.templateId ?? data.eventType,
-      checklist:           checklist as unknown[],
-      timeline:            timeline  as unknown[],
-      metadata:            { budgetCategories: data.budgetCategories ?? template?.defaultBudgetCategories ?? [] },
+      checklist:           JSON.stringify(checklist) as any,
+      timeline:            JSON.stringify(timeline) as any,
+      metadata:            JSON.stringify({ budgetCategories: data.budgetCategories ?? template?.defaultBudgetCategories ?? [] }) as any,
     }).returning();
 
     created = row;
-  } catch (dbErr: unknown) {
+  } catch (dbErr: any) {
+    console.error("FULL DB ERROR:", dbErr);
     const msg = dbErr instanceof Error ? dbErr.message : 'Database error';
     await writeAudit({
       userId: user.id, action: 'event.create', resourceType: 'event',
