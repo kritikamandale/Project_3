@@ -7,7 +7,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <PichwaiHeroBg className="fixed" />
 
       {/* Logo */}
-      <Link href="/" className="relative z-10 flex items-center gap-2 mb-8">
+      <Link href="/" className="relative z-10 flex items-center gap-2 mb-8 px-6 py-3 rounded-xl bg-black/20 backdrop-blur-md border border-[rgba(201,147,58,0.2)] transition-transform hover:scale-105">
         <svg width="36" height="36" viewBox="0 0 32 32" fill="none" aria-hidden="true">
           {[0, 45, 90, 135, 180, 225, 270, 315].map((deg, i) => (
             <ellipse key={i} cx="16" cy="8" rx="3" ry="8"

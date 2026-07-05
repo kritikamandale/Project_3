@@ -58,7 +58,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {/* Subtle Pichwai background */}
           <PichwaiBackground intensity="subtle" parallax={false} />
 
-          <div className="relative z-10 p-4 sm:p-6 lg:p-8 pb-20 lg:pb-8">
+          <div className="relative z-10 p-4 sm:p-6 lg:p-8 pb-20 lg:pb-8 min-h-full bg-black/20 backdrop-blur-md">
             {children}
           </div>
         </main>

@@ -100,12 +100,14 @@ export default function AboutPage() {
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <span className="font-cinzel text-xs uppercase tracking-widest text-[var(--pichwai-gold-deep)] block mb-3">
-              ✦ What Drives Us ✦
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--pichwai-dark-brown)]">
-              Our Core Values
-            </h2>
+            <div className="inline-block px-8 py-4 rounded-xl bg-black/20 backdrop-blur-md border border-[rgba(201,147,58,0.2)]">
+              <span className="font-cinzel text-xs uppercase tracking-widest text-[var(--pichwai-gold-deep)] block mb-3 drop-shadow-md">
+                ✦ What Drives Us ✦
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--pichwai-dark-brown)] drop-shadow-md">
+                Our Core Values
+              </h2>
+            </div>
           </motion.div>
 
           <motion.div
@@ -138,19 +140,21 @@ export default function AboutPage() {
       {/* ─── Final CTA ─── */}
       <section className="py-24 px-4 bg-[var(--pichwai-cream)] relative overflow-hidden">
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-[var(--pichwai-dark-brown)] mb-6">
-            Become part of our story.
-          </h2>
-          <p className="text-lg text-[var(--pichwai-mid-brown)] mb-10">
-            Start planning your next grand celebration with EventNest today.
-          </p>
+          <div className="inline-block px-10 py-8 rounded-xl bg-black/20 backdrop-blur-md border border-[rgba(201,147,58,0.2)] mb-10">
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-[var(--pichwai-dark-brown)] mb-4 drop-shadow-md">
+              Become part of our story.
+            </h2>
+            <p className="text-lg text-[var(--pichwai-mid-brown)] drop-shadow-md">
+              Start planning your next grand celebration with EventNest today.
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
              <Button variant="pichwai" size="xl" asChild>
               <Link href="/register">
                 Get Started <ArrowRight className="h-5 w-5 ml-2" />
               </Link>
             </Button>
-            <Button variant="outline" size="xl" asChild>
+            <Button variant="outline" size="xl" className="bg-black/20 backdrop-blur-md hover:bg-black/30" asChild>
               <Link href="/pricing">
                 View Pricing
               </Link>

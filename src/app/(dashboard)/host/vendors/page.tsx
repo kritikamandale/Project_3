@@ -65,9 +65,9 @@ export default function HostVendorsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-cinzel font-bold text-[var(--pichwai-gold-deep)]">Find Vendors</h1>
-        <p className="text-sm text-[var(--muted-fg)] mt-1">Browse trusted vendors for your events.</p>
+      <div className="inline-block px-6 py-3 rounded-xl bg-black/20 backdrop-blur-md border border-[rgba(201,147,58,0.2)]">
+        <h1 className="text-2xl font-cinzel font-bold text-[var(--pichwai-gold-deep)] drop-shadow-md">Find Vendors</h1>
+        <p className="text-sm text-[rgba(255,255,255,0.7)] mt-1 drop-shadow-md">Browse trusted vendors for your events.</p>
       </div>
 
       {/* Search */}

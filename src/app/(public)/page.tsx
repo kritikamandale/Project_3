@@ -15,7 +15,7 @@ import { fadeInUp, fadeInScale, staggerContainer } from '@/lib/animations';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const inView = useInView(ref, { once: false, margin: '-80px' });
   return (
     <motion.section
       ref={ref}
@@ -129,7 +129,7 @@ const EVENT_CARDS = [
 
 function EventCard({ card, index }: { card: typeof EVENT_CARDS[number], index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const cardInView = useInView(cardRef, { once: true, margin: '-100px' });
+  const cardInView = useInView(cardRef, { once: false, margin: '-100px' });
 
   const isLeftColumn = index % 2 === 0;
 
@@ -144,10 +144,10 @@ function EventCard({ card, index }: { card: typeof EVENT_CARDS[number], index: n
       variants={cardVariants}
       initial="hidden"
       animate={cardInView ? 'visible' : 'hidden'}
-      className="flex flex-col rounded-3xl shadow-lg border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 p-4 md:p-6"
-      style={{ background: card.color, borderColor: card.border }}
+      className="flex flex-col rounded-3xl shadow-lg border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 p-4 md:p-6 bg-gradient-to-br from-[#C9933A] to-[#9B6A1A]"
+      style={{ borderColor: '#8B6508' }}
     >
-      <div className="relative w-full aspect-[16/10] ornate-gold-frame shrink-0">
+      <div className="relative w-full aspect-[16/10] border-[3px] border-[#C9933A] rounded-xl overflow-hidden shrink-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={card.image}
@@ -157,13 +157,13 @@ function EventCard({ card, index }: { card: typeof EVENT_CARDS[number], index: n
       </div>
 
       <div className="pt-6 md:pt-8 flex flex-col flex-1">
-        <h3 className="font-display text-2xl md:text-3xl font-bold mb-2" style={{ color: card.text }}>
+        <h3 className="font-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#3b001a' }}>
           {card.label}
         </h3>
-        <p className="text-sm md:text-base text-[var(--muted-fg)] leading-relaxed flex-1">
+        <p className="text-sm md:text-base text-[#5C0A38]/80 leading-relaxed flex-1 font-medium">
           {card.desc}
         </p>
-        <div className="mt-6 flex items-center gap-2 cursor-pointer group w-fit" style={{ color: card.text }}>
+        <div className="mt-6 flex items-center gap-2 cursor-pointer group w-fit text-[#5C0A38]">
           <span className="font-semibold uppercase tracking-widest text-xs">Explore</span>
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
         </div>
@@ -174,7 +174,7 @@ function EventCard({ card, index }: { card: typeof EVENT_CARDS[number], index: n
 
 function EventTypesSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const inView = useInView(ref, { once: false, margin: '-60px' });
 
   return (
     <section className="py-20 px-4 bg-[var(--pichwai-cream)] overflow-hidden">
@@ -237,7 +237,7 @@ const STEPS = [
 
 function HowItWorksSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const inView = useInView(ref, { once: false, margin: '-60px' });
 
   // Generate petals for the giant FULL flower
   const numPetals = 24;
@@ -327,7 +327,7 @@ const FEATURED_VENDORS = [
 
 function VendorShowcase() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const inView = useInView(ref, { once: false, margin: '-60px' });
 
   return (
     <section className="py-20 px-4 bg-[var(--pichwai-cream)] overflow-hidden">
@@ -395,7 +395,7 @@ const TESTIMONIALS = [
 
 function TestimonialsSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const inView = useInView(ref, { once: false, margin: '-60px' });
 
   return (
     <section className="py-20 px-4 bg-transparent">
@@ -405,12 +405,14 @@ function TestimonialsSection() {
           variants={fadeInUp}
           className="text-center mb-14"
         >
-          <span className="font-cinzel text-xs uppercase tracking-widest text-[var(--pichwai-gold)] block mb-3 opacity-90">
-            ✦ What Families Say ✦
-          </span>
-          <h2 className="font-display text-title md:text-hero font-bold text-white">
-            Loved across India
-          </h2>
+          <div className="inline-block px-8 py-4 rounded-xl bg-black/20 backdrop-blur-md border border-[rgba(201,147,58,0.2)]">
+            <span className="font-cinzel text-xs uppercase tracking-widest text-[var(--pichwai-gold)] block mb-3 opacity-90 drop-shadow-md">
+              ✦ What Families Say ✦
+            </span>
+            <h2 className="font-display text-title md:text-hero font-bold text-white drop-shadow-md">
+              Loved across India
+            </h2>
+          </div>
         </motion.div>
 
         <motion.div
@@ -481,7 +483,7 @@ const PLANS = [
 
 function PricingSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const inView = useInView(ref, { once: false, margin: '-60px' });
 
   return (
     <section className="py-20 px-4 bg-transparent overflow-hidden">
@@ -491,12 +493,14 @@ function PricingSection() {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <span className="font-cinzel text-xs uppercase tracking-widest text-[var(--pichwai-gold)] block mb-3 opacity-90">
-            ✦ Simple Pricing ✦
-          </span>
-          <h2 className="font-display text-title md:text-hero font-bold text-white max-w-2xl mx-auto">
-            Plans for every celebration
-          </h2>
+          <div className="inline-block px-8 py-4 rounded-xl bg-black/20 backdrop-blur-md border border-[rgba(201,147,58,0.2)]">
+            <span className="font-cinzel text-xs uppercase tracking-widest text-[var(--pichwai-gold)] block mb-3 opacity-90 drop-shadow-md">
+              ✦ Simple Pricing ✦
+            </span>
+            <h2 className="font-display text-title md:text-hero font-bold text-white drop-shadow-md">
+              Plans for every celebration
+            </h2>
+          </div>
         </motion.div>
 
         <motion.div

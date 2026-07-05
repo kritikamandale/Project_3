@@ -59,9 +59,9 @@ export default function HostSettingsPage() {
   return (
     <div className="space-y-6 max-w-2xl">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-cinzel font-bold text-[var(--pichwai-gold-deep)]">Settings</h1>
-        <p className="text-sm text-[var(--muted-fg)] mt-1">Manage your account and preferences.</p>
+      <div className="inline-block px-6 py-3 rounded-xl bg-black/20 backdrop-blur-md border border-[rgba(201,147,58,0.2)]">
+        <h1 className="text-2xl font-cinzel font-bold text-[var(--pichwai-gold-deep)] drop-shadow-md">Settings</h1>
+        <p className="text-sm text-[rgba(255,255,255,0.7)] mt-1 drop-shadow-md">Manage your account and preferences.</p>
       </div>
 
       {/* Success banner */}

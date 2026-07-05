@@ -41,9 +41,9 @@ export default function BudgetOverviewPage() {
   return (
     <div className="max-w-5xl mx-auto">
       <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-cinzel font-bold text-[var(--pichwai-gold-deep)]">Budget Overview</h1>
-          <p className="text-sm text-[var(--muted-fg)] mt-1">Track spending across all your events</p>
+        <div className="inline-block px-6 py-3 rounded-xl bg-black/20 backdrop-blur-md border border-[rgba(201,147,58,0.2)]">
+          <h1 className="text-2xl font-cinzel font-bold text-[var(--pichwai-gold-deep)] drop-shadow-md">Budget Overview</h1>
+          <p className="text-sm text-[rgba(255,255,255,0.7)] mt-1 drop-shadow-md">Track spending across all your events</p>
         </div>
         <Link
           href="/host/events/new"
