@@ -34,11 +34,47 @@ async function seedVendors() {
 
     console.log(`Using user ID: ${userId} for vendors`);
 
+    const namesByCategory = {
+      catering: ['Maharaja Caterers', 'Swad Kitchens'],
+      photography: ['Lens & Light Weddings', 'Capture Moments Studio'],
+      decoration: ['Royal Mandap Decor', 'Floral Fantasy Planners'],
+      venue: ['The Grand Lotus Palace', 'Heritage Courtyard'],
+      entertainment: ['Desi Beats Dance Troupe', 'Sufi Soul Entertainers'],
+      music: ['Rhythm DJs', 'Saptaswara Live Band'],
+      transport: ['Royal Chariots', 'Luxury Wheels India'],
+      mehendi: ['Heena Art by Anjali', 'Priya Mehendi Studio'],
+      makeup: ['Glamour by Riya', 'Radiant Bride Studio'],
+      cake: ['The Royal Bakers', 'Sweet Celebrations'],
+      invitation: ['Shubh Lekh Invites', 'Golden Motif Cards'],
+      flowers: ['Pushpanjali Florists', 'Blooms & Petals'],
+      tent: ['Majestic Tents', 'Rajwada Tent House'],
+      light: ['Bright Spark Illuminations', 'Aura Lighting Co'],
+      security: ['SafeGuard Events', 'Vanguard Security Services'],
+      event_planner: ['Shaadi Makers', 'Elite Event Planners'],
+      choreographer: ['Step & Groove', 'Baraat Dance Company'],
+      anchor: ['Host with the Most - Rahul', 'Charismatic Ankita'],
+      priest: ['Pandit Ji Services', 'Shubh Muhurat Priests'],
+      other: ['Event Essentials', 'Celebration Supplies']
+    };
+
+    const imageMap = {
+      anchor: 'entertainment',
+      priest: 'event_planner',
+      other: 'flowers'
+    };
+
+    // First, clear existing vendors to avoid duplicates and ensure we have a clean slate.
+    console.log("Clearing existing vendors...");
+    await pool.query('DELETE FROM vendors;');
+
     const vendorsToInsert = [];
 
     for (const cat of categories) {
       for (let i = 1; i <= 2; i++) {
-        const businessName = `${cat.charAt(0).toUpperCase() + cat.slice(1)} Experts ${i}`;
+        const businessName = namesByCategory[cat][i-1];
+        const imageCat = imageMap[cat] || cat;
+        const coverImageUrl = `/images/vendors/${imageCat}.png`;
+
         vendorsToInsert.push([
           randomUUID(),
           userId,
@@ -52,7 +88,8 @@ async function seedVendors() {
           Math.floor(Math.random() * 5000) + 1000, // price starting from
           5 + Math.floor(Math.random() * 10), // years experience
           Math.floor(Math.random() * 100), // total events
-          (4 + Math.random()).toFixed(1) // average rating
+          (4 + Math.random()).toFixed(1), // average rating
+          coverImageUrl
         ]);
       }
     }
@@ -64,9 +101,9 @@ async function seedVendors() {
         INSERT INTO vendors (
           id, user_id, business_name, slug, category, description, 
           city, state, phone, price_starting_from, years_experience, 
-          total_events_done, average_rating, is_verified, is_active
+          total_events_done, average_rating, cover_image_url, is_verified, is_active
         ) VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'verified', true
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, 'verified', true
         )
       `, v);
     }

@@ -165,10 +165,10 @@ function EventCard({ card, index }: { card: typeof EVENT_CARDS[number], index: n
         <p className="text-sm md:text-base text-[#5C0A38]/80 leading-relaxed flex-1 font-medium">
           {card.desc}
         </p>
-        <div className="mt-6 flex items-center gap-2 cursor-pointer group w-fit text-[#5C0A38]">
+        <Link href="/register" className="mt-6 flex items-center gap-2 cursor-pointer group w-fit text-[#5C0A38]">
           <span className="font-semibold uppercase tracking-widest text-xs">Explore</span>
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
-        </div>
+        </Link>
       </div>
     </motion.div>
   );
