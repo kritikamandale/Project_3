@@ -14,10 +14,10 @@ const STEPS = [
 ];
 
 export function buildVendorWelcomeHtml(p: Params): string {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://eventnest.in';
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://milap.in';
 
   return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Welcome to EventNest Vendors</title></head>
+<title>Welcome to Milap Vendors</title></head>
 <body style="margin:0;padding:0;background:#FFF8F0;font-family:'Georgia',serif;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFF8F0;">
 <tr><td align="center" style="padding:24px 16px;">
@@ -26,7 +26,7 @@ export function buildVendorWelcomeHtml(p: Params): string {
 
   <!-- Header -->
   <tr><td align="center" style="background:linear-gradient(135deg,#3E2000,#6B3A1F);padding:32px;">
-    <p style="color:#C9933A;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin:0 0 8px;font-weight:400;">EventNest</p>
+    <p style="color:#C9933A;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin:0 0 8px;font-weight:400;">Milap</p>
     <h1 style="color:#FFFDF8;font-size:28px;margin:0;">Welcome, ${p.businessName}! 🌸</h1>
     <p style="color:#F4E4C1;font-size:14px;margin:8px 0 0;">You're now part of India's premier event marketplace</p>
   </td></tr>
@@ -35,7 +35,7 @@ export function buildVendorWelcomeHtml(p: Params): string {
   <tr><td style="padding:28px 32px 16px;">
     <p style="color:#3E2000;font-size:16px;margin:0;">Hi <strong>${p.vendorName}</strong>,</p>
     <p style="color:#6B3A1F;font-size:15px;line-height:1.6;margin:12px 0 0;">
-      Congratulations! Your vendor account on <strong>EventNest</strong> is ready.
+      Congratulations! Your vendor account on <strong>Milap</strong> is ready.
       Complete your profile to start appearing in search results and receive booking inquiries from thousands of event hosts.
     </p>
   </td></tr>
@@ -75,7 +75,7 @@ export function buildVendorWelcomeHtml(p: Params): string {
     <div style="background:#F9F5E8;border-left:3px solid #C9933A;border-radius:8px;padding:14px 16px;">
       <p style="color:#3E2000;font-size:13px;margin:0;font-weight:600;">Need help getting started?</p>
       <p style="color:#8B6914;font-size:12px;margin:4px 0 0;">
-        Email us at <a href="mailto:support@eventnest.in" style="color:#C9933A;">support@eventnest.in</a> or visit our help center.
+        Email us at <a href="mailto:support@milap.in" style="color:#C9933A;">support@milap.in</a> or visit our help center.
       </p>
     </div>
   </td></tr>
@@ -83,7 +83,7 @@ export function buildVendorWelcomeHtml(p: Params): string {
   <!-- Footer -->
   <tr><td align="center" style="border-top:1px solid #F4E4C1;padding:16px 32px;">
     <p style="color:#8B6914;font-size:11px;margin:0;">
-      <strong style="color:#C9933A;">EventNest</strong> — India's Smart Event Platform<br/>
+      <strong style="color:#C9933A;">Milap</strong> — India's Smart Event Platform<br/>
       <a href="${appUrl}/vendor/profile" style="color:#C9933A;text-decoration:none;">Manage Profile</a>
       &nbsp;·&nbsp;
       <a href="${appUrl}/help" style="color:#C9933A;text-decoration:none;">Help Center</a>

@@ -105,7 +105,7 @@ export async function middleware(request: NextRequest) {
   // ── 0. Public pages — skip all auth logic entirely ─────────────────────────
   if (isPublicPage(pathname) || isAuthPage(pathname)) {
     // Still try to attach user context if a valid token exists, but never block
-    const quickToken = request.cookies.get('eventnest_session')?.value ?? null;
+    const quickToken = request.cookies.get('milap_session')?.value ?? null;
     if (quickToken) {
       const quickUser = await extractUser(quickToken);
       if (quickUser && isAuthPage(pathname)) {
@@ -130,8 +130,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const accessToken    = request.cookies.get('eventnest_session')?.value ?? null;
-  const rawRefreshToken = request.cookies.get('eventnest_refresh')?.value ?? null;
+  const accessToken    = request.cookies.get('milap_session')?.value ?? null;
+  const rawRefreshToken = request.cookies.get('milap_refresh')?.value ?? null;
 
   // ── 1. Try to verify access token ──────────────────────────────────────────
   let user: JWTUser | null = null;
@@ -163,9 +163,9 @@ export async function middleware(request: NextRequest) {
 
       // Re-read the new access token from Set-Cookie to attach user headers
       const newAccessCookie = setCookies
-        .find((c) => c.startsWith('eventnest_session='))
+        .find((c) => c.startsWith('milap_session='))
         ?.split(';')[0]
-        ?.replace('eventnest_session=', '');
+        ?.replace('milap_session=', '');
 
       if (newAccessCookie) {
         user = await extractUser(newAccessCookie);
@@ -188,8 +188,8 @@ export async function middleware(request: NextRequest) {
     const loginUrl = new URL('/login', request.url);
     loginUrl.searchParams.set('returnUrl', pathname);
     const redirectRes = NextResponse.redirect(loginUrl);
-    redirectRes.cookies.delete('eventnest_session');
-    redirectRes.cookies.delete('eventnest_refresh');
+    redirectRes.cookies.delete('milap_session');
+    redirectRes.cookies.delete('milap_refresh');
     return redirectRes;
   }
 

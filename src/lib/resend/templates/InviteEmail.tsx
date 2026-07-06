@@ -69,7 +69,7 @@ export function buildInviteEmailHtml(params: InviteEmailParams): string {
             <td align="center" style="background:linear-gradient(135deg,#3E2000,#6B3A1F);padding:28px 24px 20px;">
               <div style="margin-bottom:8px;">${lotusSvg}</div>
               <h1 style="color:#C9933A;font-family:'Georgia',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;margin:0;font-weight:400;">
-                EventNest
+                Milap
               </h1>
             </td>
           </tr>
@@ -170,7 +170,7 @@ export function buildInviteEmailHtml(params: InviteEmailParams): string {
           <tr>
             <td align="center" style="padding:20px 32px;">
               <p style="color:#8B6914;font-size:11px;margin:0;line-height:1.6;">
-                This invitation was sent via <strong style="color:#C9933A;">EventNest</strong> — India's Smart Event Platform<br/>
+                This invitation was sent via <strong style="color:#C9933A;">Milap</strong> — India's Smart Event Platform<br/>
                 If you believe this was sent in error, please ignore this email.
               </p>
             </td>

@@ -52,10 +52,8 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h1 className="text-3xl font-bold mb-6 text-center">Register</h1>
+    <>
+      <h1 className="text-3xl font-cinzel font-bold mb-8 text-center text-[#C9933A]">Register</h1>
 
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
@@ -72,7 +70,7 @@ export default function RegisterPage() {
                 value={form.fullName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9933A] text-gray-900 placeholder:text-gray-400 bg-white/50 backdrop-blur-sm"
                 placeholder="Enter your full name"
               />
             </div>
@@ -85,7 +83,7 @@ export default function RegisterPage() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9933A] text-gray-900 placeholder:text-gray-400 bg-white/50 backdrop-blur-sm"
                 placeholder="Enter your email"
               />
             </div>
@@ -101,7 +99,7 @@ export default function RegisterPage() {
                 onChange={handleChange}
                 required
                 maxLength={10}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9933A] text-gray-900 placeholder:text-gray-400 bg-white/50 backdrop-blur-sm"
                 placeholder="9876543210"
               />
             </div>
@@ -115,7 +113,7 @@ export default function RegisterPage() {
                 onChange={handleChange}
                 required
                 autoComplete="new-password"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9933A] text-gray-900 placeholder:text-gray-400 bg-white/50 backdrop-blur-sm"
                 placeholder="Min 8 chars, 1 uppercase, 1 number, 1 special"
               />
             </div>
@@ -126,7 +124,7 @@ export default function RegisterPage() {
                 name="role"
                 value={form.role}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9933A] bg-white/50 backdrop-blur-sm text-gray-900"
               >
                 <option value="host">Host (planning an event)</option>
                 <option value="vendor">Vendor (providing services)</option>
@@ -136,20 +134,18 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-60"
+              className="w-full bg-[#C9933A] text-white font-semibold py-3 rounded-lg hover:bg-[#B07D2C] transition disabled:opacity-60 shadow-md"
             >
               {loading ? 'Creating account…' : 'Register'}
             </button>
           </form>
 
-          <p className="mt-4 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-gray-600">
             Already have an account?{' '}
-            <Link href="/login" className="text-blue-600 hover:underline">
+            <Link href="/login" className="text-[#C9933A] font-semibold hover:underline">
               Login
             </Link>
           </p>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

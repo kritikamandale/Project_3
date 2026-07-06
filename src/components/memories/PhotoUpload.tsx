@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useCallback, useRef, useState } from 'react';
+import NextImage from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ALLOWED_TYPES  = ['image/jpeg', 'image/png', 'image/webp'] as const;
@@ -212,8 +213,7 @@ export function PhotoUpload({ eventId, onUploaded, disabled }: PhotoUploadProps)
           >
             {entries.map((entry) => (
               <div key={entry.id} className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 group">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={entry.preview} alt="" className="w-full h-full object-cover" />
+                <NextImage src={entry.preview} alt="" fill className="object-cover" unoptimized />
 
                 {/* Status overlay */}
                 {entry.status === 'uploading' && (

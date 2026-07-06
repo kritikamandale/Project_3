@@ -333,12 +333,8 @@ h1, h2, h3, h4, h5, h6 {
   --border-gold:        rgba(192, 144, 32, 0.45);
 }
 
-/* ── Apply the arch pattern directly to every section & main ──────────────
-   background-attachment: fixed pins the tile grid to the viewport, so the
-   pattern is perfectly continuous as the user scrolls through sections.     */
-
-section,
-main {
+/* ── Apply the arch pattern only where explicitly needed ────────────── */
+.bg-arch-pattern {
   background-color: #5C0A38 !important;
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='148'%3E%3Cpath d='M 60,0 C 90,0 120,40 120,74 C 120,108 90,148 60,148 C 30,148 0,108 0,74 C 0,40 30,0 60,0 Z' fill='none' stroke='%23C09020' stroke-width='1.8'/%3E%3Ccircle cx='60' cy='74' r='17' fill='%23700A40' opacity='0.38'/%3E%3Cg transform='translate(60,74)'%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-14' rx='4.5' ry='11' fill='%23D9A0AD' transform='rotate(288)'/%3E%3Ccircle cx='0' cy='0' r='4.5' fill='%23C47888'/%3E%3C/g%3E%3C/svg%3E"),

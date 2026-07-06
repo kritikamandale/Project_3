@@ -85,8 +85,7 @@ export function useAuth() {
     return () => {
       if (refreshTimerRef.current) clearTimeout(refreshTimerRef.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isAuthenticated, scheduleRefresh, setLoading, storeLogout]);
 
   const login = useCallback(
     async (email: string, password: string): Promise<{ error?: string }> => {

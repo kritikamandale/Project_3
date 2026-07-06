@@ -10,9 +10,9 @@ import {
 } from './jwt';
 import type { JWTPayload, UserRole } from '@/types/auth.types';
 
-const ACCESS_COOKIE  = 'eventnest_session';
-const REFRESH_COOKIE = 'eventnest_refresh';
-const CSRF_COOKIE    = 'eventnest_csrf';
+const ACCESS_COOKIE  = 'milap_session';
+const REFRESH_COOKIE = 'milap_refresh';
+const CSRF_COOKIE    = 'milap_csrf';
 
 const BASE_COOKIE = {
   httpOnly: true,

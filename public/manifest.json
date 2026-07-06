@@ -1,6 +1,6 @@
 {
-  "name": "EventNest — Smart Event Management",
-  "short_name": "EventNest",
+  "name": "Milap — Smart Event Management",
+  "short_name": "Milap",
   "description": "India's premier Pichwai-inspired smart event management platform",
   "start_url": "/",
   "display": "standalone",
@@ -66,14 +66,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "EventNest Dashboard"
+      "label": "Milap Dashboard"
     },
     {
       "src": "/images/screenshot-mobile.png",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "EventNest Mobile"
+      "label": "Milap Mobile"
     }
   ],
   "shortcuts": [

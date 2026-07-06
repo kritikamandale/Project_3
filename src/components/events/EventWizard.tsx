@@ -7,6 +7,7 @@ import React, {
   useCallback,
   type ChangeEvent,
 } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useForm, Controller, type UseFormReturn } from 'react-hook-form';
@@ -52,7 +53,7 @@ const STEP_FIELDS: (keyof WizardFormData)[][] = [
 ];
 
 const STEPS = ['Event Type', 'Basic Details', 'Date & Venue', 'Budget', 'Review'];
-const STORAGE_KEY = 'eventnest_wizard_draft';
+const STORAGE_KEY = 'milap_wizard_draft';
 
 // Chart color palette
 const CHART_COLORS = [
@@ -83,7 +84,7 @@ function buildConicGradient(categories: BudgetCategoryTemplate[]): string {
 function getCsrfToken(): string | undefined {
   return document.cookie
     .split('; ')
-    .find((r) => r.startsWith('eventnest_csrf='))
+    .find((r) => r.startsWith('milap_csrf='))
     ?.split('=')[1];
 }
 
@@ -232,8 +233,7 @@ function Step2BasicDetails({
         </label>
         {coverImageUrl ? (
           <div className="relative w-full h-36 rounded-xl overflow-hidden border border-pichwai-gold/30">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={coverImageUrl} alt="Cover" className="w-full h-full object-cover" />
+            <Image src={coverImageUrl} alt="Cover" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             <button
               type="button"
               onClick={() => form.setValue('coverImageUrl', '')}
@@ -630,12 +630,13 @@ function Step5Review({
 
         {/* Cover image */}
         {values.coverImageUrl && (
-          <div className="mt-3 rounded-xl overflow-hidden h-32 border border-pichwai-gold/20">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          <div className="mt-3 rounded-xl overflow-hidden h-32 border border-pichwai-gold/20 relative">
+            <Image
               src={values.coverImageUrl}
               alt="Cover"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         )}
@@ -739,7 +740,7 @@ export default function EventWizard() {
     if (template && budgetCategories.length === 0) {
       setBudgetCategories(template.defaultBudgetCategories);
     }
-  }, [eventType]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [eventType, budgetCategories.length, setBudgetCategories]);
 
   const validateStep = useCallback(async (): Promise<boolean> => {
     const fields = STEP_FIELDS[step];

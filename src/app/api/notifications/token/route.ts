@@ -11,7 +11,7 @@ const bodySchema = z.object({ token: z.string().min(1) });
 
 export async function POST(req: NextRequest) {
   const jar = await cookies();
-  const sessionToken = jar.get('eventnest_session')?.value;
+  const sessionToken = jar.get('milap_session')?.value;
   if (!sessionToken) return Response.json({ error: 'Unauthorized' }, { status: 401 });
 
   let user;

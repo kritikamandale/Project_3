@@ -76,7 +76,7 @@ export function LotusPageLoader() {
       <div className="flex flex-col items-center gap-4">
         <LotusLoader size={96} />
         <p className="font-cinzel text-sm text-[var(--pichwai-gold)] tracking-widest uppercase opacity-70">
-          EventNest
+          Milap
         </p>
       </div>
     </div>

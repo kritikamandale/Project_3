@@ -9,7 +9,7 @@ const PAGE_SIZE = 20;
 
 async function getAuthUser() {
   const jar = await cookies();
-  const token = jar.get('eventnest_session')?.value;
+  const token = jar.get('milap_session')?.value;
   if (!token) return null;
   try { return await verifyAccessToken(token); } catch { return null; }
 }

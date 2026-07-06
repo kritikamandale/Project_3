@@ -220,7 +220,7 @@ export default function PricingPage() {
             Ready to plan the perfect event?
           </h2>
           <p className="text-lg text-[rgba(255,255,255,0.8)] mb-10">
-            Join thousands of hosts across India who trust EventNest.
+            Join thousands of hosts across India who trust Milap.
           </p>
           <Button variant="pichwai" size="xl" className="shadow-[0_0_20px_rgba(201,147,58,0.4)] hover:shadow-[0_0_30px_rgba(201,147,58,0.6)]" asChild>
             <Link href="/register">

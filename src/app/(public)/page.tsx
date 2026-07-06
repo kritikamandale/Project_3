@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight, Star, Check } from 'lucide-react';
@@ -148,11 +149,12 @@ function EventCard({ card, index }: { card: typeof EVENT_CARDS[number], index: n
       style={{ borderColor: '#8B6508' }}
     >
       <div className="relative w-full aspect-[16/10] border-[3px] border-[#C9933A] rounded-xl overflow-hidden shrink-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={card.image}
           alt={card.label}
-          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]"
+          fill
+          className="object-cover transition-transform duration-700 hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>
 
@@ -177,7 +179,7 @@ function EventTypesSection() {
   const inView = useInView(ref, { once: false, margin: '-60px' });
 
   return (
-    <section className="py-20 px-4 bg-[var(--pichwai-cream)] overflow-hidden">
+    <section className="py-20 px-4 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="relative w-full max-w-3xl mx-auto mb-16 aspect-[940/480] flex flex-col items-center justify-center pt-16 pb-2 px-6" ref={ref}>
           <svg
@@ -330,7 +332,7 @@ function VendorShowcase() {
   const inView = useInView(ref, { once: false, margin: '-60px' });
 
   return (
-    <section className="py-20 px-4 bg-[var(--pichwai-cream)] overflow-hidden">
+    <section className="py-20 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto" ref={ref}>
         <motion.div
           initial="hidden" animate={inView ? 'visible' : 'hidden'}
@@ -388,7 +390,7 @@ function VendorShowcase() {
 // ─── 5. Testimonials ─────────────────────────────────────────────────────────
 
 const TESTIMONIALS = [
-  { name: 'Priya Sharma', city: 'Delhi', event: 'Wedding', text: 'EventNest made our dream wedding come true. The vendor search saved us weeks of calls!', avatar: 'PS' },
+  { name: 'Priya Sharma', city: 'Delhi', event: 'Wedding', text: 'Milap made our dream wedding come true. The vendor search saved us weeks of calls!', avatar: 'PS' },
   { name: 'Rohit Mehta',  city: 'Mumbai', event: 'Corporate', text: 'Our annual conference was flawless. The guest management tools are incredible.', avatar: 'RM' },
   { name: 'Anita Patel',  city: 'Ahmedabad', event: 'Birthday', text: 'My daughter\'s princess party was magical. Found the perfect decorator in 10 minutes!', avatar: 'AP' },
 ] as const;

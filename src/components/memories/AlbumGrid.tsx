@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export interface Memory {
@@ -53,12 +54,13 @@ function Lightbox({ memory, onClose, onPrev, onNext, hasPrev, hasNext, isHost, o
     >
       <div className="relative max-w-5xl max-h-[90vh] w-full mx-4" onClick={(e) => e.stopPropagation()}>
         {/* Image */}
-        <div className="relative">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+        <div className="relative w-full max-h-[70vh]">
+          <Image
             src={memory.url}
             alt={memory.caption ?? ''}
-            className="w-full max-h-[70vh] object-contain rounded-xl"
+            fill
+            className="object-contain rounded-xl"
+            sizes="90vw"
           />
 
           {/* Close */}
@@ -166,12 +168,13 @@ export function AlbumGrid({ memories, isHost, eventId, onUpdate, onDelete }: Alb
               className="break-inside-avoid mb-3 relative group cursor-pointer rounded-xl overflow-hidden"
               onClick={() => setLightboxIdx(idx)}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={memory.thumbnailUrl ?? memory.url}
                 alt={memory.caption ?? ''}
+                width={400}
+                height={300}
                 className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
 
               {/* Overlay */}

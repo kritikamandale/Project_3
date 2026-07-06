@@ -7,14 +7,14 @@ async function registerAndLogin(page: Page, email: string, role: 'host' | 'vendo
   await page.getByLabel(/full name/i).fill('Test User');
   await page.getByLabel(/email/i).fill(email);
   await page.getByLabel(/phone/i).fill('9876543210');
-  await page.getByLabel(/password/i).fill('EventNest@2025');
+  await page.getByLabel(/password/i).fill('Milap@2025');
   await page.getByRole('radio', { name: new RegExp(role, 'i') }).click();
   await page.getByRole('button', { name: /register/i }).click();
   // After registration redirect to dashboard or email verification page
   await page.waitForURL(/(dashboard|verify|login)/, { timeout: 10_000 });
 }
 
-async function login(page: Page, email: string, password = 'EventNest@2025') {
+async function login(page: Page, email: string, password = 'Milap@2025') {
   await page.goto('/login');
   await page.getByLabel(/email/i).fill(email);
   await page.getByLabel(/password/i).fill(password);
@@ -24,7 +24,7 @@ async function login(page: Page, email: string, password = 'EventNest@2025') {
 
 // ─── Journey 1: Host creates a wedding event ──────────────────────────────────
 test.describe('Host — Event Creation Journey', () => {
-  const HOST_EMAIL = `host-${Date.now()}@eventnest-test.com`;
+  const HOST_EMAIL = `host-${Date.now()}@milap-test.com`;
 
   test('host can register and reach the dashboard', async ({ page }) => {
     await page.goto('/register');
@@ -32,7 +32,7 @@ test.describe('Host — Event Creation Journey', () => {
     await page.getByLabel(/full name/i).fill('Priya Sharma');
     await page.getByLabel(/email/i).fill(HOST_EMAIL);
     await page.getByLabel(/phone/i).fill('9845678901');
-    await page.getByLabel(/password/i).fill('EventNest@2025');
+    await page.getByLabel(/password/i).fill('Milap@2025');
     // Select host role
     const hostRadio = page.locator('input[value="host"]');
     await hostRadio.check();
@@ -52,7 +52,7 @@ test.describe('Host — Event Creation Journey', () => {
 
   test('login page shows error for wrong credentials', async ({ page }) => {
     await page.goto('/login');
-    await page.getByLabel(/email/i).fill('nobody@eventnest-test.com');
+    await page.getByLabel(/email/i).fill('nobody@milap-test.com');
     await page.getByLabel(/password/i).fill('WrongPass@123');
     await page.getByRole('button', { name: /sign in|login/i }).click();
     await expect(

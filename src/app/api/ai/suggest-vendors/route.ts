@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { eq, inArray } from 'drizzle-orm';
+import { inArray } from 'drizzle-orm';
 import { z } from 'zod/v4';
 import { generateText } from 'ai';
 import { db, vendors } from '@/lib/db';
 import { groq, GROQ_MODEL, SYSTEM_PROMPT } from '@/lib/groq/client';
 import { searchSimilarVendors } from '@/lib/pinecone/embeddings';
+import { cookies } from 'next/headers';
+import { verifyAccessToken } from '@/lib/auth/jwt';
 
 const BodySchema = z.object({
   query:      z.string().min(3).max(500),
@@ -14,14 +16,14 @@ const BodySchema = z.object({
   guestCount: z.number().optional(),
 });
 
-function getUser(req: NextRequest) {
-  const id = req.headers.get('x-user-id');
-  return id ? { id } : null;
-}
-
 export async function POST(req: NextRequest) {
-  const user = getUser(req);
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const jar = await cookies();
+  const token = jar.get('milap_session')?.value;
+  if (!token) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  let user;
+  try { user = await verifyAccessToken(token); }
+  catch { return NextResponse.json({ error: 'Unauthorized' }, { status: 401 }); }
 
   let body: unknown;
   try { body = await req.json(); } catch {

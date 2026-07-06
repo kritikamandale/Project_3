@@ -38,7 +38,7 @@ export function Footer() {
                 ))}
                 <circle cx="16" cy="16" r="4" fill="#E8C06B" />
               </svg>
-              <span className="font-cinzel text-xl font-bold gold-text-spec">EventNest</span>
+              <span className="font-cinzel text-xl font-bold gold-text-spec">Milap</span>
             </div>
             <p className="text-small text-[rgba(255,248,231,0.6)] leading-relaxed max-w-xs">
               India&apos;s most beautiful event management platform. Rooted in tradition,
@@ -87,7 +87,7 @@ export function Footer() {
         <PichwaiDivider variant="gold" size="lg" className="opacity-20 mb-8" />
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-caption text-[rgba(255,248,231,0.4)]">
-          <p>© {new Date().getFullYear()} EventNest. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Milap. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Made with <span className="text-[var(--pichwai-lotus)]">❤️</span> for India
           </p>

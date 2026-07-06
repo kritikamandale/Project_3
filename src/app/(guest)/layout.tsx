@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'EventNest',
-  description: 'Your invitation from EventNest',
+  title: 'Milap',
+  description: 'Your invitation from Milap',
 };
 
 export default function GuestLayout({ children }: { children: React.ReactNode }) {

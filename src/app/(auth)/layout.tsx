@@ -16,16 +16,16 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           ))}
           <circle cx="16" cy="16" r="4" fill="#E8C06B" />
         </svg>
-        <span className="font-cinzel text-2xl font-bold gold-text-spec">EventNest</span>
+        <span className="font-cinzel text-2xl font-bold gold-text-spec">Milap</span>
       </Link>
 
       {/* Card */}
-      <div className="relative z-10 w-full max-w-md rounded-[var(--radius-lg)] bg-[var(--card-bg)] border border-[var(--border-gold)] shadow-[var(--shadow-pichwai)] p-8">
+      <div className="relative z-10 w-full max-w-xl rounded-[var(--radius-lg)] bg-[var(--card-bg)] border border-[var(--border-gold)] shadow-[var(--shadow-pichwai)] p-10">
         {children}
       </div>
 
       <p className="relative z-10 mt-6 text-caption text-[var(--muted-fg)]">
-        © {new Date().getFullYear()} EventNest
+        © {new Date().getFullYear()} Milap
       </p>
     </div>
   );

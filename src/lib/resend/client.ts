@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 
-const FROM = process.env.RESEND_FROM_EMAIL ?? 'noreply@eventnest.in';
+const FROM = process.env.RESEND_FROM_EMAIL ?? 'noreply@milap.in';
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
 
 function getResend(): Resend | null {
@@ -21,10 +21,10 @@ export async function sendVerificationEmail(
   await resend.emails.send({
     from: FROM,
     to,
-    subject: 'Verify your EventNest account',
+    subject: 'Verify your Milap account',
     html: `
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
-        <h2>Welcome to EventNest, ${name}!</h2>
+        <h2>Welcome to Milap, ${name}!</h2>
         <p>Please verify your email address to activate your account.</p>
         <a href="${link}"
            style="display:inline-block;padding:12px 24px;background:#b45309;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">
@@ -50,7 +50,7 @@ export async function sendPasswordResetEmail(
   await resend.emails.send({
     from: FROM,
     to,
-    subject: 'Reset your EventNest password',
+    subject: 'Reset your Milap password',
     html: `
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
         <h2>Password Reset Request</h2>
@@ -74,11 +74,11 @@ export async function sendWelcomeEmail(to: string, name: string): Promise<void> 
   await resend.emails.send({
     from: FROM,
     to,
-    subject: 'Welcome to EventNest!',
+    subject: 'Welcome to Milap!',
     html: `
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
         <h2>Your account is active, ${name}!</h2>
-        <p>Start planning your perfect event with EventNest.</p>
+        <p>Start planning your perfect event with Milap.</p>
         <a href="${APP_URL}/host/dashboard"
            style="display:inline-block;padding:12px 24px;background:#b45309;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">
           Go to Dashboard

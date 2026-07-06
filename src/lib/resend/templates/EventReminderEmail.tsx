@@ -24,7 +24,7 @@ export function buildEventReminderHtml(p: Params): string {
 
   <!-- Header banner -->
   <tr><td align="center" style="background:linear-gradient(135deg,#6B3A1F,#C9933A);padding:24px 32px;">
-    <p style="color:#F4E4C1;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin:0 0 4px;">EventNest</p>
+    <p style="color:#F4E4C1;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin:0 0 4px;">Milap</p>
     <h1 style="color:#FFFDF8;font-size:26px;margin:0;">⏰ Happening Tomorrow!</h1>
   </td></tr>
 
@@ -69,7 +69,7 @@ export function buildEventReminderHtml(p: Params): string {
   <!-- Footer -->
   <tr><td align="center" style="border-top:1px solid #F4E4C1;padding:16px 32px;">
     <p style="color:#8B6914;font-size:11px;margin:0;">
-      Sent via <strong style="color:#C9933A;">EventNest</strong> — India's Smart Event Platform
+      Sent via <strong style="color:#C9933A;">Milap</strong> — India's Smart Event Platform
     </p>
   </td></tr>
   <tr><td style="background:linear-gradient(135deg,#C9933A,#F4A825);height:5px;"/></tr>

@@ -48,7 +48,7 @@ export async function GET(req: NextRequest, { params }: RouteCtx) {
   const zipUrl = cloudinary.utils.download_zip_url({
     public_ids:         publicIds,
     resource_type:      'image',
-    target_public_id:   `eventnest-${eventId}-album`,
+    target_public_id:   `milap-${eventId}-album`,
     flatten_folders:    true,
     expires_at:         Math.floor(Date.now() / 1000) + 3600,
   });

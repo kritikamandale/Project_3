@@ -21,7 +21,7 @@ export async function sendPhoneOTP(to: string, otp: string): Promise<void> {
   if (!from) return;
 
   await client.messages.create({
-    body: `Your EventNest verification code is: ${otp}. Valid for 10 minutes. Do not share this code.`,
+    body: `Your Milap verification code is: ${otp}. Valid for 10 minutes. Do not share this code.`,
     from,
     to,
   });
@@ -35,7 +35,7 @@ export async function sendWhatsAppOTP(to: string, otp: string): Promise<void> {
   const formattedTo = to.startsWith('whatsapp:') ? to : `whatsapp:${to}`;
 
   await client.messages.create({
-    body: `Your EventNest OTP is *${otp}*. Valid for 10 minutes.`,
+    body: `Your Milap OTP is *${otp}*. Valid for 10 minutes.`,
     from,
     to: formattedTo,
   });

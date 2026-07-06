@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
+import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -124,7 +125,7 @@ function StatRing({
 
 function getCsrfToken() {
   return typeof window !== 'undefined'
-    ? document.cookie.split('; ').find((r) => r.startsWith('eventnest_csrf='))?.split('=')[1]
+    ? document.cookie.split('; ').find((r) => r.startsWith('milap_csrf='))?.split('=')[1]
     : undefined;
 }
 
@@ -205,11 +206,12 @@ export default function EventDashboardPage() {
       >
         {event.coverImageUrl && (
           <div className="absolute inset-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={event.coverImageUrl}
               alt={event.title}
-              className="w-full h-full object-cover opacity-30"
+              fill
+              className="object-cover opacity-30"
+              sizes="100vw"
             />
           </div>
         )}

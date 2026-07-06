@@ -123,7 +123,7 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
         <div className="flex items-center gap-2">
           <span className="text-xl">🪔</span>
           <div>
-            <p className="font-semibold text-[var(--foreground)] text-sm">EventNest AI</p>
+            <p className="font-semibold text-[var(--foreground)] text-sm">Milap AI</p>
             <p className="text-xs text-[var(--muted-fg)]">Your event planning assistant</p>
           </div>
         </div>
@@ -163,7 +163,7 @@ export function AIAssistant({ events = [] }: AIAssistantProps) {
           <div className="flex flex-col items-center justify-center h-full text-center py-12">
             <div className="text-4xl mb-4">🌸</div>
             <h3 className="font-playfair text-lg font-semibold text-[var(--pichwai-gold-deep)] mb-1">
-              Namaste! I&apos;m EventNest AI
+              Namaste! I&apos;m Milap AI
             </h3>
             <p className="text-sm text-[var(--muted-fg)] max-w-xs">
               Ask me anything about event planning — venues, budgets, guest lists, vendors, menus, and more.

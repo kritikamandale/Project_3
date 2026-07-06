@@ -13,7 +13,7 @@ const TABS = [
 
 type Tab = typeof TABS[number]['id'];
 
-export default function HostSettingsPage() {
+export default function VendorSettingsPage() {
   const { user } = useAuth();
   const [activeTab, setTab] = useState<Tab>('profile');
 

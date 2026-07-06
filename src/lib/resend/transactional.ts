@@ -6,7 +6,7 @@ import { buildRSVPConfirmationHtml }    from './templates/RSVPConfirmationEmail'
 import { buildVendorWelcomeHtml }       from './templates/VendorWelcomeEmail';
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
-const FROM   = process.env.RESEND_FROM_EMAIL ?? 'noreply@eventnest.in';
+const FROM   = process.env.RESEND_FROM_EMAIL ?? 'noreply@milap.in';
 
 // ── Booking Confirmation ──────────────────────────────────────────────────────
 
@@ -25,7 +25,7 @@ export async function sendBookingConfirmationEmail(
   await resend.emails.send({
     from:    FROM,
     to:      params.to,
-    subject: `Booking Confirmed — ${params.bookingRef} | EventNest`,
+    subject: `Booking Confirmed — ${params.bookingRef} | Milap`,
     html:    buildBookingConfirmationHtml(params),
   });
 }
@@ -47,7 +47,7 @@ export async function sendPaymentReceiptEmail(
   await resend.emails.send({
     from:    FROM,
     to:      params.to,
-    subject: `Payment Receipt — ${params.bookingRef} | EventNest`,
+    subject: `Payment Receipt — ${params.bookingRef} | Milap`,
     html:    buildPaymentReceiptHtml(params),
   });
 }
@@ -71,7 +71,7 @@ export async function sendEventReminderEmail(
   await resend.emails.send({
     from:    FROM,
     to:      params.to,
-    subject: `Reminder: ${params.eventTitle} is Tomorrow! | EventNest`,
+    subject: `Reminder: ${params.eventTitle} is Tomorrow! | Milap`,
     html:    buildEventReminderHtml(params),
   });
 }
@@ -93,7 +93,7 @@ export async function sendRSVPConfirmationEmail(
   await resend.emails.send({
     from:    FROM,
     to:      params.to,
-    subject: `RSVP ${params.rsvpStatus === 'confirmed' ? 'Confirmed' : 'Received'} — ${params.eventTitle} | EventNest`,
+    subject: `RSVP ${params.rsvpStatus === 'confirmed' ? 'Confirmed' : 'Received'} — ${params.eventTitle} | Milap`,
     html:    buildRSVPConfirmationHtml(params),
   });
 }
@@ -113,7 +113,7 @@ export async function sendVendorWelcomeEmail(
   await resend.emails.send({
     from:    FROM,
     to:      params.to,
-    subject: `Welcome to EventNest Vendor Marketplace, ${params.businessName}!`,
+    subject: `Welcome to Milap Vendor Marketplace, ${params.businessName}!`,
     html:    buildVendorWelcomeHtml(params),
   });
 }

@@ -30,23 +30,23 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'EventNest — Smart Event Management',
-    template: '%s | EventNest',
+    default: 'Milap — Smart Event Management',
+    template: '%s | Milap',
   },
   description:
     "India's premier Pichwai-inspired smart event management platform. Plan weddings, pujas, corporate events and more with AI-powered assistance.",
-  keywords: ['event management', 'wedding planning', 'India', 'vendors', 'EventNest', 'Pichwai'],
-  authors: [{ name: 'EventNest' }],
+  keywords: ['event management', 'wedding planning', 'India', 'vendors', 'Milap', 'Pichwai'],
+  authors: [{ name: 'Milap' }],
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'EventNest',
+    title: 'Milap',
   },
   openGraph: {
     type: 'website',
-    siteName: 'EventNest',
-    title: 'EventNest — Smart Event Management',
+    siteName: 'Milap',
+    title: 'Milap — Smart Event Management',
     description: "India's premier smart event management platform",
   },
 };

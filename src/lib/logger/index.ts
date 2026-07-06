@@ -65,7 +65,7 @@ export const logger = pino({
     err: pino.stdSerializers.err,
     error: pino.stdSerializers.err,
   },
-  base: { service: 'eventnest' },
+  base: { service: 'milap' },
 });
 
 // ─── Audit log helper ─────────────────────────────────────────────────────────

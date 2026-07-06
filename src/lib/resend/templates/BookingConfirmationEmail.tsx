@@ -10,7 +10,7 @@ interface Params {
 
 export function buildBookingConfirmationHtml(p: Params): string {
   const amountStr = `₹${p.amount.toLocaleString('en-IN')}`;
-  const appUrl    = process.env.NEXT_PUBLIC_APP_URL ?? 'https://eventnest.in';
+  const appUrl    = process.env.NEXT_PUBLIC_APP_URL ?? 'https://milap.in';
 
   const lotusSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 60" width="160" height="60">
     <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -34,7 +34,7 @@ export function buildBookingConfirmationHtml(p: Params): string {
   <!-- Header -->
   <tr><td align="center" style="background:linear-gradient(135deg,#3E2000,#6B3A1F);padding:24px;">
     <div>${lotusSvg}</div>
-    <h1 style="color:#C9933A;font-size:12px;letter-spacing:4px;text-transform:uppercase;margin:8px 0 0;font-weight:400;">EventNest</h1>
+    <h1 style="color:#C9933A;font-size:12px;letter-spacing:4px;text-transform:uppercase;margin:8px 0 0;font-weight:400;">Milap</h1>
   </td></tr>
 
   <!-- Title -->
@@ -74,7 +74,7 @@ export function buildBookingConfirmationHtml(p: Params): string {
   <!-- Footer -->
   <tr><td align="center" style="border-top:1px solid #F4E4C1;padding:20px 32px;">
     <p style="color:#8B6914;font-size:11px;margin:0;">
-      Sent via <strong style="color:#C9933A;">EventNest</strong> — India's Smart Event Platform
+      Sent via <strong style="color:#C9933A;">Milap</strong> — India's Smart Event Platform
     </p>
   </td></tr>
   <tr><td style="background:linear-gradient(135deg,#C9933A,#F4A825);height:5px;"/></tr>

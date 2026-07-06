@@ -1,6 +1,7 @@
 'use client';
 
 import React, { use, useCallback, useEffect, useRef, useState } from 'react';
+import NextImage from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const;
@@ -216,7 +217,7 @@ export default function GuestUploadPage({ params }: { params: Promise<{ inviteTo
             <span className="font-medium">{guestInfo?.eventTitle}</span>.
             The host will be so happy to see them!
           </p>
-          <p className="text-xs text-pichwai-brown/30 mt-6">Powered by EventNest 🌸</p>
+          <p className="text-xs text-pichwai-brown/30 mt-6">Powered by Milap 🌸</p>
         </motion.div>
       </div>
     );
@@ -293,8 +294,7 @@ export default function GuestUploadPage({ params }: { params: Promise<{ inviteTo
                 {entries.map((entry) => (
                   <div key={entry.id} className="flex gap-3 items-start">
                     <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={entry.preview} alt="" className="w-full h-full object-cover" />
+                      <NextImage src={entry.preview} alt="" fill className="object-cover" unoptimized />
                       {entry.status === 'uploading' && (
                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                           <span className="text-white text-xs">{entry.progress}%</span>
@@ -348,7 +348,7 @@ export default function GuestUploadPage({ params }: { params: Promise<{ inviteTo
         )}
 
         <p className="text-center text-xs text-pichwai-brown/30">
-          Powered by EventNest 🌸
+          Powered by Milap 🌸
         </p>
       </div>
     </div>

@@ -46,7 +46,7 @@ function uid() {
 
 function getCsrfToken() {
   return typeof window !== 'undefined'
-    ? document.cookie.split('; ').find((r) => r.startsWith('eventnest_csrf='))?.split('=')[1]
+    ? document.cookie.split('; ').find((r) => r.startsWith('milap_csrf='))?.split('=')[1]
     : undefined;
 }
 

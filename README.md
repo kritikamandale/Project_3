@@ -1,6 +1,6 @@
-# EventNest
+# Milap
 
-EventNest is a premium, AI-powered event hosting and vendor management platform designed for luxury and elegance. Built with Next.js and styled with a bespoke dark maroon glassmorphism theme inspired by traditional Pichwai art, EventNest connects users with top-tier verified vendors across India for weddings, corporate events, and grand celebrations.
+Milap is a premium, AI-powered event hosting and vendor management platform designed for luxury and elegance. Built with Next.js and styled with a bespoke dark maroon glassmorphism theme inspired by traditional Pichwai art, Milap connects users with top-tier verified vendors across India for weddings, corporate events, and grand celebrations.
 
 ## Features
 

@@ -32,16 +32,16 @@ const ADMIN_BOTTOM = [
   { label: 'Analytics',href: '/admin/analytics',   icon: BarChart3 },
 ] as const;
 
-function navForRole(role: UserRole | undefined) {
-  if (role === 'vendor')      return VENDOR_BOTTOM;
-  if (role === 'super_admin') return ADMIN_BOTTOM;
+function navForRole(role: UserRole | undefined, pathname: string) {
+  if (role === 'vendor' || pathname.startsWith('/vendor'))      return VENDOR_BOTTOM;
+  if (role === 'super_admin' || pathname.startsWith('/admin')) return ADMIN_BOTTOM;
   return HOST_BOTTOM;
 }
 
 export function MobileNav() {
   const pathname = usePathname();
   const { user }  = useAuth();
-  const nav = navForRole(user?.role);
+  const nav = navForRole(user?.role, pathname);
 
   return (
     <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[var(--card-bg)] border-t border-[var(--border-gold)] safe-area-inset-bottom">

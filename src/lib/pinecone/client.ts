@@ -12,4 +12,4 @@ if (process.env.NODE_ENV !== 'production')
   globalForPinecone.pinecone = pinecone;
 
 export const PINECONE_INDEX =
-  process.env.PINECONE_INDEX_NAME ?? 'eventnest-vendors';
+  process.env.PINECONE_INDEX_NAME ?? 'milap-vendors';

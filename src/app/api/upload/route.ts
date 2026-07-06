@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cloudinary, memoriesFolder } from '@/lib/cloudinary/config';
 
-const ALLOWED_FOLDER_PREFIXES = ['event-covers', 'eventnest/'];
+const ALLOWED_FOLDER_PREFIXES = ['event-covers', 'milap/'];
 
 function getUser(req: NextRequest) {
   const id = req.headers.get('x-user-id');
@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   const eventId = url.searchParams.get('eventId');
 
-  const folder    = eventId ? memoriesFolder(eventId) : `eventnest/users/${user.id}`;
+  const folder    = eventId ? memoriesFolder(eventId) : `milap/users/${user.id}`;
   const timestamp = Math.round(Date.now() / 1000);
 
   const params: Record<string, unknown> = {

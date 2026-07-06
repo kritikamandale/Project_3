@@ -1,6 +1,6 @@
 import { type NextRequest } from 'next/server';
 import { db, vendors, vendorReviews } from '@/lib/db';
-import { sql, and, gte, lte, like, or, desc, asc, eq, count } from 'drizzle-orm';
+import { sql, and, gte, lte, like, or, desc, asc, eq, isNull, count } from 'drizzle-orm';
 import { cacheGet, cacheSet, vendorCacheKey } from '@/lib/redis/client';
 
 const PAGE_SIZE = 20;
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
   const conditions = [
     eq(vendors.isActive, true),
-    eq(vendors.deletedAt, null as unknown as Date),
+    isNull(vendors.deletedAt),
   ];
 
   if (category)  conditions.push(eq(vendors.category, category as never));
@@ -115,7 +115,7 @@ export async function GET(request: NextRequest) {
   const [{ total }] = await db
     .select({ total: count() })
     .from(vendors)
-    .where(and(...conditions.slice(0, conditions.length)));
+    .where(and(...conditions));
 
   const payload = { items, total, nextCursor, hasMore };
   await cacheSet(cacheKey, payload, CACHE_TTL);

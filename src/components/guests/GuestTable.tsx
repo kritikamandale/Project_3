@@ -48,7 +48,7 @@ const RSVP_BADGE: Record<string, { label: string; cls: string }> = {
 
 function getCsrfToken() {
   return typeof window !== 'undefined'
-    ? document.cookie.split('; ').find((r) => r.startsWith('eventnest_csrf='))?.split('=')[1]
+    ? document.cookie.split('; ').find((r) => r.startsWith('milap_csrf='))?.split('=')[1]
     : undefined;
 }
 
@@ -581,34 +581,11 @@ export default function GuestTable({ eventId, guests: initialGuests, onRefresh }
         </div>
       ),
     }),
-  ], []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // ── Filtered data (manual filters stacked before table global filter) ────
-
-  const filteredData = useMemo(() => {
-    let d = data;
-    if (rsvpFilter)                 d = d.filter((g) => g.rsvpStatus === rsvpFilter);
-    if (groupFilter)                d = d.filter((g) => g.groupName  === groupFilter);
-    if (checkinFilter === 'checked')    d = d.filter((g) => !!g.checkInAt);
-    if (checkinFilter === 'unchecked')  d = d.filter((g) => !g.checkInAt);
-    return d;
-  }, [data, rsvpFilter, groupFilter, checkinFilter]);
-
-  const table = useReactTable({
-    data:         filteredData,
-    columns,
-    state:        { sorting, rowSelection, globalFilter },
-    onSortingChange:      setSorting,
-    onRowSelectionChange: setRowSelection,
-    onGlobalFilterChange: setGlobal,
-    getCoreRowModel:     getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel:   getSortedRowModel(),
-  });
+  ], []);
 
   // ── Actions ───────────────────────────────────────────────────────────────
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = useCallback(async (id: string) => {
     if (!window.confirm('Delete this guest?')) return;
     const csrf = getCsrfToken();
     await fetch(`/api/events/${eventId}/guests/${id}`, {
@@ -616,7 +593,7 @@ export default function GuestTable({ eventId, guests: initialGuests, onRefresh }
       headers: csrf ? { 'x-csrf-token': csrf } : {},
     });
     setData((prev) => prev.filter((g) => g.id !== id));
-  };
+  }, [eventId]);
 
   const handleResendInvite = useCallback(async (ids: string[]) => {
     setSending(true);
@@ -634,7 +611,6 @@ export default function GuestTable({ eventId, guests: initialGuests, onRefresh }
       } else {
         const d = await res.json() as { sent: number };
         setBulkMsg(`✓ ${d.sent} invite(s) sent`);
-        // Update inviteSentAt locally
         const now = new Date().toISOString();
         setData((prev) => prev.map((g) => ids.includes(g.id) ? { ...g, inviteSentAt: now } : g));
       }
@@ -658,6 +634,29 @@ export default function GuestTable({ eventId, guests: initialGuests, onRefresh }
     setData((prev) => prev.filter((g) => !selectedIds.includes(g.id)));
     setRowSelection({});
   };
+
+  // ── Filtered data (manual filters stacked before table global filter) ────
+
+  const filteredData = useMemo(() => {
+    let d = data;
+    if (rsvpFilter)                 d = d.filter((g) => g.rsvpStatus === rsvpFilter);
+    if (groupFilter)                d = d.filter((g) => g.groupName  === groupFilter);
+    if (checkinFilter === 'checked')    d = d.filter((g) => !!g.checkInAt);
+    if (checkinFilter === 'unchecked')  d = d.filter((g) => !g.checkInAt);
+    return d;
+  }, [data, rsvpFilter, groupFilter, checkinFilter]);
+
+  const table = useReactTable({
+    data:         filteredData,
+    columns,
+    state:        { sorting, rowSelection, globalFilter },
+    onSortingChange:      setSorting,
+    onRowSelectionChange: setRowSelection,
+    onGlobalFilterChange: setGlobal,
+    getCoreRowModel:     getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel:   getSortedRowModel(),
+  });
 
   const groups = useMemo(
     () => [...new Set(data.map((g) => g.groupName).filter(Boolean) as string[])],

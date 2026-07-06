@@ -32,7 +32,7 @@ const CreateVendorSchema = z.object({
 
 export async function POST(req: NextRequest) {
   const jar = await cookies();
-  const token = jar.get('eventnest_session')?.value;
+  const token = jar.get('milap_session')?.value;
   if (!token) return Response.json({ error: 'Unauthorized' }, { status: 401 });
 
   let user;
@@ -79,9 +79,9 @@ export async function POST(req: NextRequest) {
       priceRangeMax:     rest.priceRangeMax ?? null,
       pricePerUnit:      rest.pricePerUnit ?? null,
       yearsExperience:   rest.yearsExperience ?? 0,
-      packages: (rest.packages ?? []) as unknown as never,
-      faq:      (rest.faq ?? []) as unknown as never,
-      metadata: (rest.metadata ?? {}) as never,
+      packages: (rest.packages ?? []) as unknown,
+      faq:      (rest.faq ?? []) as unknown,
+      metadata: (rest.metadata ?? {}) as unknown,
     })
     .returning();
 

@@ -78,14 +78,14 @@ export default function AboutPage() {
             className="w-full max-w-3xl mx-auto px-4 mt-8"
           >
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 drop-shadow-md">
-              Why EventNest?
+              Why Milap?
             </h2>
             <div className="space-y-6 text-base md:text-lg text-[rgba(255,255,255,0.85)] leading-relaxed mx-auto text-center">
               <p>
                 In India, an event is never just a gathering; it is a profound celebration of life, family, and tradition. However, the joy of these occasions is often overshadowed by the immense stress of coordinating vendors, managing guest lists, and tracking infinite details.
               </p>
               <p>
-                We built EventNest to change that. By combining the rich aesthetics of Indian heritage with the incredible power of artificial intelligence, we have created a platform that handles the logistics so you can focus on making memories.
+                We built Milap to change that. By combining the rich aesthetics of Indian heritage with the incredible power of artificial intelligence, we have created a platform that handles the logistics so you can focus on making memories.
               </p>
             </div>
           </motion.div>
@@ -145,7 +145,7 @@ export default function AboutPage() {
               Become part of our story.
             </h2>
             <p className="text-lg text-[var(--pichwai-mid-brown)] drop-shadow-md">
-              Start planning your next grand celebration with EventNest today.
+              Start planning your next grand celebration with Milap today.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row justify-center gap-4">

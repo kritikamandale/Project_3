@@ -25,6 +25,7 @@ export default function LoginPage() {
   useEffect(() => {
     if (!isAuthenticated || !user) return;
     if (user.role === 'super_admin') router.replace('/admin/dashboard');
+    else if (user.role === 'vendor') router.replace('/vendor/dashboard');
     else router.replace('/host/dashboard');
   }, [isAuthenticated, user, router]);
 
@@ -47,10 +48,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
+    <>
+      <h1 className="text-3xl font-cinzel font-bold mb-8 text-center text-[#C9933A]">Login</h1>
 
           {success && (
             <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 rounded-lg text-sm">
@@ -74,7 +73,7 @@ export default function LoginPage() {
                 onChange={handleChange}
                 required
                 autoComplete="email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9933A] text-gray-900 placeholder:text-gray-400 bg-white/50 backdrop-blur-sm"
                 placeholder="Enter your email"
               />
             </div>
@@ -88,13 +87,13 @@ export default function LoginPage() {
                 onChange={handleChange}
                 required
                 autoComplete="current-password"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder:text-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C9933A] text-gray-900 placeholder:text-gray-400 bg-white/50 backdrop-blur-sm"
                 placeholder="Enter your password"
               />
             </div>
 
             <div className="flex justify-end">
-              <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+              <Link href="/forgot-password" className="text-sm text-[#C9933A] hover:underline font-medium">
                 Forgot password?
               </Link>
             </div>
@@ -102,20 +101,18 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-60"
+              className="w-full bg-[#C9933A] text-white font-semibold py-3 rounded-lg hover:bg-[#B07D2C] transition disabled:opacity-60 shadow-md"
             >
               {loading ? 'Logging in…' : 'Login'}
             </button>
           </form>
 
-          <p className="mt-4 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-gray-600">
             Don&apos;t have an account?{' '}
-            <Link href="/register" className="text-blue-600 hover:underline">
+            <Link href="/register" className="text-[#C9933A] font-semibold hover:underline">
               Register
             </Link>
           </p>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

@@ -239,7 +239,7 @@ export function PublicNavbar() {
             ))}
             <circle cx="16" cy="16" r="4" fill="#E8C06B" />
           </svg>
-          <span className="font-cinzel text-lg font-bold gold-text-spec">EventNest</span>
+          <span className="font-cinzel text-lg font-bold gold-text-spec">Milap</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-6">

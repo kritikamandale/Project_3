@@ -27,14 +27,14 @@ interface OfflineCheckIn {
   checkedInAt: string;
 }
 
-const QUEUE_KEY   = 'eventnest_checkin_queue';
-const GUESTS_KEY  = (eid: string) => `eventnest_guests_${eid}`;
+const QUEUE_KEY   = 'milap_checkin_queue';
+const GUESTS_KEY  = (eid: string) => `milap_guests_${eid}`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function getCsrfToken() {
   return typeof window !== 'undefined'
-    ? document.cookie.split('; ').find((r) => r.startsWith('eventnest_csrf='))?.split('=')[1]
+    ? document.cookie.split('; ').find((r) => r.startsWith('milap_csrf='))?.split('=')[1]
     : undefined;
 }
 

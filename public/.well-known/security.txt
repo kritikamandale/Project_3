@@ -1,5 +1,5 @@
-Contact: mailto:security@eventnest.in
+Contact: mailto:security@milap.in
 Expires: 2026-12-31T23:59:59.000Z
 Preferred-Languages: en, hi
-Canonical: https://eventnest.in/.well-known/security.txt
-Policy: https://eventnest.in/security-policy
+Canonical: https://milap.in/.well-known/security.txt
+Policy: https://milap.in/security-policy

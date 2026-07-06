@@ -10,11 +10,11 @@ cloudinary.config({
 export { cloudinary };
 
 export function memoriesFolder(eventId: string) {
-  return `eventnest/events/${eventId}`;
+  return `milap/events/${eventId}`;
 }
 
 export function vendorFolder(vendorId: string) {
-  return `eventnest/vendors/${vendorId}`;
+  return `milap/vendors/${vendorId}`;
 }
 
 export function thumbnailUrl(publicId: string): string {

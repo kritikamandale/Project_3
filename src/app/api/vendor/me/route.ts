@@ -6,7 +6,7 @@ import { verifyAccessToken } from '@/lib/auth/jwt';
 
 export async function GET(_req: NextRequest) {
   const jar = await cookies();
-  const token = jar.get('eventnest_session')?.value;
+  const token = jar.get('milap_session')?.value;
   if (!token) return Response.json({ error: 'Unauthorized' }, { status: 401 });
 
   let user;

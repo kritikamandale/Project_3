@@ -37,9 +37,9 @@ const ADMIN_NAV = [
   { label: 'Analytics',  href: '/admin/analytics',   icon: BarChart3 },
 ] as const;
 
-function navForRole(role: UserRole | undefined) {
-  if (role === 'vendor')      return VENDOR_NAV;
-  if (role === 'super_admin') return ADMIN_NAV;
+function navForRole(role: UserRole | undefined, pathname: string) {
+  if (role === 'vendor' || pathname.startsWith('/vendor'))      return VENDOR_NAV;
+  if (role === 'super_admin' || pathname.startsWith('/admin')) return ADMIN_NAV;
   return HOST_NAV;
 }
 
@@ -51,7 +51,7 @@ interface SidebarProps {
 export function Sidebar({ onClose, isOpen }: SidebarProps) {
   const pathname = usePathname();
   const { user } = useAuth();
-  const nav = navForRole(user?.role);
+  const nav = navForRole(user?.role, pathname);
 
   return (
     <aside
@@ -71,7 +71,7 @@ export function Sidebar({ onClose, isOpen }: SidebarProps) {
             ))}
             <circle cx="16" cy="16" r="4" fill="#E8C06B" />
           </svg>
-          <span className="font-cinzel text-base font-bold gold-text-spec">EventNest</span>
+          <span className="font-cinzel text-base font-bold gold-text-spec">Milap</span>
         </Link>
         {onClose && (
           <button onClick={onClose} className="lg:hidden p-1 rounded hover:bg-[var(--muted)] transition-colors" aria-label="Close sidebar">

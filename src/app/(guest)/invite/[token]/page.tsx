@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EVENT_TYPES } from '@/lib/constants/eventTypes';
@@ -81,7 +82,7 @@ export default function InvitePage() {
 
   // Load invite data (try cache first for offline support)
   useEffect(() => {
-    const CACHE_KEY = `eventnest_invite_${token}`;
+    const CACHE_KEY = `milap_invite_${token}`;
 
     const load = async () => {
       try {
@@ -152,7 +153,7 @@ export default function InvitePage() {
       setPhase('success');
     } catch {
       // Queue for later sync
-      const QUEUE_KEY = 'eventnest_rsvp_queue';
+      const QUEUE_KEY = 'milap_rsvp_queue';
       const queue = JSON.parse(localStorage.getItem(QUEUE_KEY) ?? '[]') as unknown[];
       queue.push({ token, payload, queuedAt: new Date().toISOString() });
       localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
@@ -165,7 +166,7 @@ export default function InvitePage() {
   // Sync queued RSVPs when back online
   useEffect(() => {
     const syncQueue = async () => {
-      const QUEUE_KEY = 'eventnest_rsvp_queue';
+      const QUEUE_KEY = 'milap_rsvp_queue';
       const queue = JSON.parse(localStorage.getItem(QUEUE_KEY) ?? '[]') as Array<{
         token: string;
         payload: unknown;
@@ -214,11 +215,12 @@ export default function InvitePage() {
           {/* Cover image or gradient header */}
           {event.coverImageUrl ? (
             <div className="h-48 overflow-hidden relative">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={event.coverImageUrl}
                 alt={event.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="100vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-pichwai-brown/60 via-transparent to-transparent" />
             </div>
@@ -420,7 +422,7 @@ export default function InvitePage() {
         </motion.div>
 
         <p className="text-center text-xs text-pichwai-brown/30 mt-6">
-          Powered by EventNest 🌸
+          Powered by Milap 🌸
         </p>
       </div>
     </div>
@@ -521,7 +523,7 @@ function SuccessCard({
           </div>
         )}
 
-        <p className="text-xs text-pichwai-brown/30 mt-6">Powered by EventNest 🌸</p>
+        <p className="text-xs text-pichwai-brown/30 mt-6">Powered by Milap 🌸</p>
       </motion.div>
     </div>
   );

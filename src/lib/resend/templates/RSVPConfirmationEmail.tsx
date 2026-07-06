@@ -16,7 +16,7 @@ const STATUS_CONFIG = {
 
 export function buildRSVPConfirmationHtml(p: Params): string {
   const cfg    = STATUS_CONFIG[p.rsvpStatus];
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://eventnest.in';
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'https://milap.in';
 
   return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>RSVP ${cfg.label}</title></head>
@@ -28,7 +28,7 @@ export function buildRSVPConfirmationHtml(p: Params): string {
 
   <!-- Header -->
   <tr><td align="center" style="background:linear-gradient(135deg,#3E2000,#6B3A1F);padding:24px 32px;">
-    <p style="color:#C9933A;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin:0 0 4px;font-weight:400;">EventNest</p>
+    <p style="color:#C9933A;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin:0 0 4px;font-weight:400;">Milap</p>
     <h1 style="color:#FFFDF8;font-size:24px;margin:0;">RSVP Update</h1>
   </td></tr>
 
@@ -71,7 +71,7 @@ export function buildRSVPConfirmationHtml(p: Params): string {
   <!-- Footer -->
   <tr><td align="center" style="border-top:1px solid #F4E4C1;padding:16px 32px;">
     <p style="color:#8B6914;font-size:11px;margin:0;">
-      Sent via <strong style="color:#C9933A;">EventNest</strong> — India's Smart Event Platform
+      Sent via <strong style="color:#C9933A;">Milap</strong> — India's Smart Event Platform
     </p>
   </td></tr>
   <tr><td style="background:linear-gradient(135deg,#C9933A,#F4A825);height:5px;"/></tr>

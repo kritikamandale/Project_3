@@ -11,7 +11,7 @@ import twilio from 'twilio';
 
 async function getAuthUser() {
   const jar = await cookies();
-  const token = jar.get('eventnest_session')?.value;
+  const token = jar.get('milap_session')?.value;
   if (!token) return null;
   try { return await verifyAccessToken(token); } catch { return null; }
 }
@@ -190,7 +190,7 @@ export async function POST(req: NextRequest) {
       }
 
       // WhatsApp — fire & forget
-      const waMsg = `✅ *EventNest Payment Confirmed*\n\nBooking: ${bookingRef}\nAmount: ${amountStr}\n\nThank you for using EventNest!`;
+      const waMsg = `✅ *Milap Payment Confirmed*\n\nBooking: ${bookingRef}\nAmount: ${amountStr}\n\nThank you for using Milap!`;
       if (host?.phone) sendWhatsApp(host.phone, waMsg).catch(() => null);
       if (vendorRow?.whatsapp) sendWhatsApp(vendorRow.whatsapp, waMsg).catch(() => null);
     }

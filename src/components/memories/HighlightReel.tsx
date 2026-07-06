@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Memory } from './AlbumGrid';
 
@@ -87,11 +88,12 @@ export function HighlightReel({ memories, autoPlay = true, interval = 3500 }: Hi
                   transition={{ duration: 0.6, ease: 'easeInOut' }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={slide.url}
                     alt={slide.caption ?? ''}
-                    className="max-h-screen max-w-full object-contain"
+                    fill
+                    className="object-contain"
+                    sizes="100vw"
                   />
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />

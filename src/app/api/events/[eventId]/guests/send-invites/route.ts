@@ -38,7 +38,7 @@ function err(msg: string, status: number) {
 
 const APP_URL    = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
 const resend     = new Resend(process.env.RESEND_API_KEY!);
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? 'noreply@eventnest.in';
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? 'noreply@milap.in';
 
 function twilioClient() {
   return twilio(process.env.TWILIO_ACCOUNT_SID!, process.env.TWILIO_AUTH_TOKEN!);
@@ -54,7 +54,7 @@ async function sendWhatsApp(
   personalMessage?: string,
 ): Promise<void> {
   const from = process.env.TWILIO_WHATSAPP_FROM ?? 'whatsapp:+14155238886';
-  const body = `🎉 *You're Invited!*\n\n*${eventTitle}*\n📅 ${eventDate}\n\n${personalMessage ? personalMessage + '\n\n' : ''}RSVP here: ${rsvpUrl}\n\n_Powered by EventNest_`;
+  const body = `🎉 *You're Invited!*\n\n*${eventTitle}*\n📅 ${eventDate}\n\n${personalMessage ? personalMessage + '\n\n' : ''}RSVP here: ${rsvpUrl}\n\n_Powered by Milap_`;
   await twilioClient().messages.create({
     body,
     from,

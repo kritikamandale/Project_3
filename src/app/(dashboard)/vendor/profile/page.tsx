@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import {
@@ -8,7 +9,7 @@ import {
   CalendarDays, Plus, Trash2, Loader2, CheckCircle2, Upload,
 } from 'lucide-react';
 import useSWR from 'swr';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { VENDOR_CATEGORIES } from '@/lib/constants/vendorCategories';
 import { ALL_CITIES, INDIAN_STATES } from '@/lib/constants/indianCities';
 import { cn } from '@/lib/utils/cn';
@@ -84,15 +85,15 @@ function useCompleteness(v: Partial<VendorFormData>): number {
   return Math.round((checks.filter(Boolean).length / checks.length) * 100);
 }
 
-const INPUT = 'w-full rounded-xl border border-pichwai-gold-200 bg-pichwai-cream-50 px-3 py-2.5 text-sm text-pichwai-brown-800 placeholder:text-pichwai-brown-300 focus:border-pichwai-gold-400 focus:outline-none';
-const LABEL = 'mb-1.5 block text-sm font-medium text-pichwai-brown-700';
+const INPUT = 'w-full rounded-xl border border-pichwai-gold-400/50 bg-[#3a0623] px-3 py-2.5 text-sm text-[#E8C06B] placeholder:text-[#E8C06B]/50 focus:border-pichwai-gold-400 focus:outline-none';
+const LABEL = 'mb-1.5 block text-sm font-medium text-[#D4AF37]';
 
 export default function VendorProfilePage() {
   const [section, setSection]   = useState<SectionId>('business');
   const [saving, setSaving]     = useState(false);
   const [uploading, setUploading] = useState(false);
 
-  const { data, mutate } = useSWR<{ vendor: Record<string, unknown> }>('/api/vendor/me', fetcher);
+  const { data, mutate } = useSWR<{ vendor: Record<string, unknown> }>('/api/vendors/me', fetcher);
   const existing = data?.vendor;
 
   const {
@@ -153,18 +154,18 @@ export default function VendorProfilePage() {
       const payload = {
         businessName:     data.businessName,
         category:         data.category,
-        tagline:          data.tagline,
-        description:      data.description,
+        tagline:          data.tagline || undefined,
+        description:      data.description || undefined,
         city:             data.city,
         state:            data.state,
         phone:            data.phone,
-        whatsapp:         data.whatsapp,
-        email:            data.email,
-        websiteUrl:       data.websiteUrl,
-        instagramUrl:     data.instagramUrl,
-        priceStartingFrom:data.priceStartingFrom || null,
-        priceRangeMax:    data.priceRangeMax || null,
-        pricePerUnit:     data.pricePerUnit,
+        whatsapp:         data.whatsapp || undefined,
+        email:            data.email || undefined,
+        websiteUrl:       (data.websiteUrl && data.websiteUrl !== 'https://') ? data.websiteUrl : undefined,
+        instagramUrl:     (data.instagramUrl && data.instagramUrl !== 'https://') ? data.instagramUrl : undefined,
+        priceStartingFrom:data.priceStartingFrom || undefined,
+        priceRangeMax:    data.priceRangeMax || undefined,
+        pricePerUnit:     data.pricePerUnit || undefined,
         yearsExperience:  Number(data.yearsExperience),
         packages: data.packages.map((p) => ({
           name: p.name,
@@ -186,7 +187,7 @@ export default function VendorProfilePage() {
       };
 
       const vendorId = existing?.id as string | undefined;
-      const url   = vendorId ? `/api/vendors/${vendorId}` : '/api/vendor/create';
+      const url   = vendorId ? `/api/vendors/${vendorId}` : '/api/vendors/create';
       const method = vendorId ? 'PATCH' : 'POST';
 
       const res = await fetch(url, {
@@ -198,7 +199,8 @@ export default function VendorProfilePage() {
       if (!res.ok) throw new Error('Save failed');
       toast.success('Profile saved!');
       mutate();
-    } catch {
+    } catch (error) {
+      console.error('Save error:', error);
       toast.error('Failed to save. Please try again.');
     } finally {
       setSaving(false);
@@ -233,29 +235,35 @@ export default function VendorProfilePage() {
     setValue(field, cur.includes(val) ? cur.filter((v) => v !== val) : [...cur, val]);
   }
 
+  function onValidationError(errors: unknown) {
+    console.error('Form validation errors:', errors);
+    toast.error('Please check all sections for missing or invalid fields.');
+  }
+
   return (
-    <div className="min-h-screen bg-pichwai-cream-50 pb-20">
+    <div className="min-h-screen bg-[#3a0623] pb-20">
+      <Toaster position="top-center" />
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-8">
         <motion.div variants={fadeInUp} initial="hidden" animate="visible" className="mb-8">
-          <h1 className="font-playfair text-3xl font-bold text-pichwai-brown-900">Vendor Profile</h1>
-          <p className="mt-1 text-pichwai-brown-500">Complete your profile to get discovered by hosts.</p>
+          <h1 className="font-playfair text-3xl font-bold text-[#E8C06B]">Vendor Profile</h1>
+          <p className="mt-1 text-[#D4AF37]/80">Complete your profile to get discovered by hosts.</p>
         </motion.div>
 
-        <form onSubmit={handleSubmit(onSave)}>
+        <form onSubmit={handleSubmit(onSave, onValidationError)}>
           <div className="flex gap-6">
             {/* Sidebar */}
             <aside className="hidden w-60 shrink-0 lg:flex lg:flex-col gap-2">
-              <div className="rounded-2xl border border-pichwai-gold-200 bg-white p-4 shadow-sm mb-4">
-                <p className="text-xs font-semibold text-pichwai-brown-500 mb-2">Profile Completeness</p>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-pichwai-cream-200">
+              <div className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-4 shadow-sm mb-4">
+                <p className="text-xs font-semibold text-[#D4AF37]/80 mb-2">Profile Completeness</p>
+                <div className="h-2 w-full overflow-hidden rounded-full bg-[#3a0623]">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-pichwai-gold-400 to-pichwai-saffron-500 transition-all duration-500"
                     style={{ width: `${completeness}%` }}
                   />
                 </div>
-                <p className={cn('mt-1.5 text-sm font-bold', completeness === 100 ? 'text-green-600' : 'text-pichwai-brown-700')}>
+                <p className={cn('mt-1.5 text-sm font-bold', completeness === 100 ? 'text-green-400' : 'text-[#E8C06B]')}>
                   {completeness}%
-                  {completeness < 100 && <span className="ml-1 text-xs font-normal text-pichwai-brown-400"> — keep going!</span>}
+                  {completeness < 100 && <span className="ml-1 text-xs font-normal text-[#D4AF37]/60"> — keep going!</span>}
                 </p>
               </div>
               {SECTIONS.map((s) => (
@@ -266,8 +274,8 @@ export default function VendorProfilePage() {
                   className={cn(
                     'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition text-left',
                     section === s.id
-                      ? 'bg-pichwai-gold-50 text-pichwai-gold-700 shadow-sm'
-                      : 'text-pichwai-brown-600 hover:bg-pichwai-cream-100',
+                      ? 'bg-[#5C0A38] text-[#E8C06B] shadow-sm border border-[#C9933A]/30'
+                      : 'text-[#D4AF37]/70 hover:bg-[#5C0A38]/50 hover:text-[#E8C06B]',
                   )}
                 >
                   <s.icon className="h-4 w-4 shrink-0" />
@@ -298,12 +306,12 @@ export default function VendorProfilePage() {
               </div>
 
               {/* Mobile completeness */}
-              <div className="mb-4 rounded-2xl border border-pichwai-gold-200 bg-white p-4 shadow-sm lg:hidden">
+              <div className="mb-4 rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-4 shadow-sm lg:hidden">
                 <div className="flex items-center justify-between mb-1.5">
-                  <p className="text-xs font-semibold text-pichwai-brown-500">Completeness</p>
-                  <p className="text-sm font-bold text-pichwai-brown-800">{completeness}%</p>
+                  <p className="text-xs font-semibold text-[#D4AF37]/80">Completeness</p>
+                  <p className="text-sm font-bold text-[#E8C06B]">{completeness}%</p>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-pichwai-cream-200">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-[#3a0623]">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-pichwai-gold-400 to-pichwai-saffron-500"
                     style={{ width: `${completeness}%` }}
@@ -313,9 +321,9 @@ export default function VendorProfilePage() {
 
               {/* ── BUSINESS ── */}
               {section === 'business' && (
-                <motion.section variants={fadeInUp} initial="hidden" animate="visible"
-                  className="rounded-2xl border border-pichwai-gold-200 bg-white p-6 shadow-sm flex flex-col gap-5">
-                  <h2 className="font-playfair text-xl font-semibold text-pichwai-brown-800">Business Details</h2>
+                <motion.div variants={fadeInUp} initial="hidden" animate="visible"
+                  className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-6 shadow-sm flex flex-col gap-5">
+                  <h2 className="font-playfair text-xl font-semibold text-[#E8C06B]">Business Details</h2>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div><label className={LABEL}>Business Name *</label>
                       <input {...register('businessName', { required: true })} className={INPUT} placeholder="Krishna Moments Photography" /></div>
@@ -356,14 +364,14 @@ export default function VendorProfilePage() {
                     <div><label className={LABEL}>Years of Experience</label>
                       <input {...register('yearsExperience')} type="number" min="0" className={INPUT} /></div>
                   </div>
-                </motion.section>
+                </motion.div>
               )}
 
               {/* ── PHOTOS ── */}
               {section === 'photos' && (
-                <motion.section variants={fadeInUp} initial="hidden" animate="visible"
-                  className="rounded-2xl border border-pichwai-gold-200 bg-white p-6 shadow-sm flex flex-col gap-6">
-                  <h2 className="font-playfair text-xl font-semibold text-pichwai-brown-800">Photos & Gallery</h2>
+                <motion.div variants={fadeInUp} initial="hidden" animate="visible"
+                  className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-6 shadow-sm flex flex-col gap-6">
+                  <h2 className="font-playfair text-xl font-semibold text-[#E8C06B]">Photos & Gallery</h2>
                   {[
                     { key: 'logoUrl', label: 'Business Logo', ratio: 'aspect-square w-32', hint: 'Square, min 200×200px' },
                     { key: 'coverImageUrl', label: 'Cover Photo', ratio: 'aspect-[3/1] w-full', hint: 'Landscape, min 1200×400px' },
@@ -373,8 +381,7 @@ export default function VendorProfilePage() {
                       <p className="mb-2 text-xs text-pichwai-brown-400">{hint}</p>
                       <div className={cn('relative overflow-hidden rounded-xl border-2 border-dashed border-pichwai-gold-200 bg-pichwai-cream-50', ratio)}>
                         {existing?.[key] ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={String(existing[key])} alt={label} className="h-full w-full object-cover" />
+                          <Image src={String(existing[key])} alt={label} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
                         ) : (
                           <div className="flex h-full flex-col items-center justify-center gap-2">
                             <Upload className="h-8 w-8 text-pichwai-gold-300" />
@@ -395,15 +402,15 @@ export default function VendorProfilePage() {
                       </div>
                     </div>
                   ))}
-                  <p className="text-xs text-pichwai-brown-400">Gallery (up to 20 photos) can be managed after saving your profile.</p>
-                </motion.section>
+                  <p className="text-xs text-[#D4AF37]/70">Gallery (up to 20 photos) can be managed after saving your profile.</p>
+                </motion.div>
               )}
 
               {/* ── PRICING ── */}
               {section === 'pricing' && (
-                <motion.section variants={fadeInUp} initial="hidden" animate="visible"
-                  className="rounded-2xl border border-pichwai-gold-200 bg-white p-6 shadow-sm flex flex-col gap-5">
-                  <h2 className="font-playfair text-xl font-semibold text-pichwai-brown-800">Pricing & Packages</h2>
+                <motion.div variants={fadeInUp} initial="hidden" animate="visible"
+                  className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-6 shadow-sm flex flex-col gap-5">
+                  <h2 className="font-playfair text-xl font-semibold text-[#E8C06B]">Pricing & Packages</h2>
                   <div className="grid gap-4 sm:grid-cols-3">
                     <div><label className={LABEL}>Starting Price (₹)</label>
                       <input {...register('priceStartingFrom')} type="number" min="0" className={INPUT} placeholder="15000" /></div>
@@ -444,14 +451,14 @@ export default function VendorProfilePage() {
                       )}
                     </div>
                   </div>
-                </motion.section>
+                </motion.div>
               )}
 
               {/* ── SERVICE AREAS ── */}
               {section === 'service' && (
-                <motion.section variants={fadeInUp} initial="hidden" animate="visible"
-                  className="rounded-2xl border border-pichwai-gold-200 bg-white p-6 shadow-sm flex flex-col gap-6">
-                  <h2 className="font-playfair text-xl font-semibold text-pichwai-brown-800">Service Areas & Preferences</h2>
+                <motion.div variants={fadeInUp} initial="hidden" animate="visible"
+                  className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-6 shadow-sm flex flex-col gap-6">
+                  <h2 className="font-playfair text-xl font-semibold text-[#E8C06B]">Service Areas & Preferences</h2>
                   <div>
                     <label className={LABEL}>Event Types Served</label>
                     <div className="mt-2 flex flex-wrap gap-2">
@@ -459,8 +466,8 @@ export default function VendorProfilePage() {
                         <button type="button" key={t} onClick={() => toggle('eventTypes', t)}
                           className={cn('rounded-full border px-3 py-1 text-xs capitalize transition',
                             fv.eventTypes?.includes(t)
-                              ? 'border-pichwai-gold-500 bg-pichwai-gold-50 font-semibold text-pichwai-gold-700'
-                              : 'border-pichwai-gold-100 text-pichwai-brown-600 hover:border-pichwai-gold-300')}>
+                              ? 'bg-[#E8C06B] border-[#E8C06B] font-semibold text-[#4A0830]'
+                              : 'border-[#E8C06B]/50 text-[#E8C06B]/70 hover:border-[#E8C06B]')}>
                           {t.replace('_', ' ')}
                         </button>
                       ))}
@@ -473,8 +480,8 @@ export default function VendorProfilePage() {
                         <button type="button" key={l} onClick={() => toggle('languages', l)}
                           className={cn('rounded-full border px-3 py-1 text-xs transition',
                             fv.languages?.includes(l)
-                              ? 'border-pichwai-gold-500 bg-pichwai-gold-50 font-semibold text-pichwai-gold-700'
-                              : 'border-pichwai-gold-100 text-pichwai-brown-600 hover:border-pichwai-gold-300')}>
+                              ? 'bg-[#E8C06B] border-[#E8C06B] font-semibold text-[#4A0830]'
+                              : 'border-[#E8C06B]/50 text-[#E8C06B]/70 hover:border-[#E8C06B]')}>
                           {l}
                         </button>
                       ))}
@@ -501,15 +508,15 @@ export default function VendorProfilePage() {
                       ))}
                     </div>
                   </div>
-                </motion.section>
+                </motion.div>
               )}
 
               {/* ── DOCUMENTS ── */}
               {section === 'documents' && (
-                <motion.section variants={fadeInUp} initial="hidden" animate="visible"
-                  className="rounded-2xl border border-pichwai-gold-200 bg-white p-6 shadow-sm flex flex-col gap-5">
-                  <h2 className="font-playfair text-xl font-semibold text-pichwai-brown-800">Verification Documents</h2>
-                  <p className="text-sm text-pichwai-brown-400">Reviewed by our team — stored securely, never shared publicly.</p>
+                <motion.div variants={fadeInUp} initial="hidden" animate="visible"
+                  className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-6 shadow-sm flex flex-col gap-5">
+                  <h2 className="font-playfair text-xl font-semibold text-[#E8C06B]">Verification Documents</h2>
+                  <p className="text-sm text-[#D4AF37]/70">Reviewed by our team — stored securely, never shared publicly.</p>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div><label className={LABEL}>GSTIN (optional)</label>
                       <input {...register('gstin')} className={INPUT} placeholder="22AAAAA0000A1Z5" /></div>
@@ -526,15 +533,15 @@ export default function VendorProfilePage() {
                       </div>
                     </div>
                   ))}
-                </motion.section>
+                </motion.div>
               )}
 
               {/* ── BANK ── */}
               {section === 'bank' && (
-                <motion.section variants={fadeInUp} initial="hidden" animate="visible"
-                  className="rounded-2xl border border-pichwai-gold-200 bg-white p-6 shadow-sm flex flex-col gap-5">
-                  <h2 className="font-playfair text-xl font-semibold text-pichwai-brown-800">Bank Account Details</h2>
-                  <p className="text-sm text-pichwai-brown-400">Encrypted. Used only for payouts. Never shared with hosts.</p>
+                <motion.div variants={fadeInUp} initial="hidden" animate="visible"
+                  className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-6 shadow-sm flex flex-col gap-5">
+                  <h2 className="font-playfair text-xl font-semibold text-[#E8C06B]">Bank Account Details</h2>
+                  <p className="text-sm text-[#D4AF37]/70">Encrypted. Used only for payouts. Never shared with hosts.</p>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div><label className={LABEL}>Account Holder Name</label>
                       <input {...register('accountHolder')} className={INPUT} /></div>
@@ -549,21 +556,21 @@ export default function VendorProfilePage() {
                     <CheckCircle2 className="h-4 w-4 shrink-0" />
                     Bank details are AES-256 encrypted at rest and never logged.
                   </div>
-                </motion.section>
+                </motion.div>
               )}
 
               {/* ── AVAILABILITY ── */}
               {section === 'availability' && (
-                <motion.section variants={fadeInUp} initial="hidden" animate="visible"
-                  className="rounded-2xl border border-pichwai-gold-200 bg-white p-6 shadow-sm flex flex-col gap-5">
-                  <h2 className="font-playfair text-xl font-semibold text-pichwai-brown-800">Availability Calendar</h2>
-                  <p className="text-sm text-pichwai-brown-500">Mark dates when you're unavailable.</p>
+                <motion.div variants={fadeInUp} initial="hidden" animate="visible"
+                  className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-6 shadow-sm flex flex-col gap-5">
+                  <h2 className="font-playfair text-xl font-semibold text-[#E8C06B]">Availability Calendar</h2>
+                  <p className="text-sm text-[#D4AF37]/70">Mark dates when you're unavailable.</p>
                   <div className="rounded-xl border border-pichwai-gold-100 bg-pichwai-cream-50 p-8 text-center text-pichwai-brown-400">
                     <CalendarDays className="mx-auto mb-2 h-10 w-10 text-pichwai-gold-300" />
                     <p className="text-sm">Full calendar management coming soon.</p>
                     <p className="mt-1 text-xs">Mention unavailable periods in your description for now.</p>
                   </div>
-                </motion.section>
+                </motion.div>
               )}
 
               {/* Save */}

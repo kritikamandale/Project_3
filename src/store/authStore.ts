@@ -37,7 +37,7 @@ export const useAuthStore = create<AuthState>()(
         set({ user: null, csrfToken: null, isAuthenticated: false }),
     }),
     {
-      name:    'eventnest-auth',
+      name:    'milap-auth',
       storage: createJSONStorage(() => localStorage),
       // Only persist user identity — never tokens (they live in httpOnly cookies)
       partialize: (state) => ({

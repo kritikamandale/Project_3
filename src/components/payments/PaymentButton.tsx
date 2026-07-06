@@ -67,7 +67,7 @@ function loadRazorpayScript(): Promise<boolean> {
 export function PaymentButton({
   bookingId,
   amount,
-  description = 'EventNest Advance Payment',
+  description = 'Milap Advance Payment',
   onSuccess,
   onFailure,
   prefill,
@@ -111,7 +111,7 @@ export function PaymentButton({
           key,
           amount:      Math.round(amount * 100),
           currency:    'INR',
-          name:        'EventNest',
+          name:        'Milap',
           description,
           image:       '/logo.png',
           order_id:    orderId,
