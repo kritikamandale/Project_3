@@ -200,7 +200,10 @@ export async function middleware(request: NextRequest) {
 
   // ── 4. Protected API routes — require valid session ─────────────────────────
   if (pathname.startsWith('/api/') && isProtectedApi(pathname)) {
-    if (!user) {
+    const isPublicVendorGet = request.method === 'GET' && 
+      (pathname === '/api/vendors' || /^\/api\/vendors\/[^\/]+(\/reviews)?$/.test(pathname));
+
+    if (!user && !isPublicVendorGet) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
   }
