@@ -296,7 +296,7 @@ export default function InvitePage() {
               Your RSVP
             </h2>
             <p className="text-sm text-pichwai-brown/50">
-              Please let the host know if you'll be attending
+              Please let the host know if you&apos;ll be attending
             </p>
           </div>
 

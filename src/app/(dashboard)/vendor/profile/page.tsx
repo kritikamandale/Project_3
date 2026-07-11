@@ -564,7 +564,7 @@ export default function VendorProfilePage() {
                 <motion.div variants={fadeInUp} initial="hidden" animate="visible"
                   className="rounded-2xl border border-pichwai-gold-200/30 bg-[#4A0830] p-6 shadow-sm flex flex-col gap-5">
                   <h2 className="font-playfair text-xl font-semibold text-[#E8C06B]">Availability Calendar</h2>
-                  <p className="text-sm text-[#D4AF37]/70">Mark dates when you're unavailable.</p>
+                  <p className="text-sm text-[#D4AF37]/70">Mark dates when you&apos;re unavailable.</p>
                   <div className="rounded-xl border border-pichwai-gold-100 bg-pichwai-cream-50 p-8 text-center text-pichwai-brown-400">
                     <CalendarDays className="mx-auto mb-2 h-10 w-10 text-pichwai-gold-300" />
                     <p className="text-sm">Full calendar management coming soon.</p>

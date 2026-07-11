@@ -1,5 +1,5 @@
 /** @type {import('next-pwa').RuntimeCaching[]} */
-module.exports = [
+const runtimeCaching = [
   {
     urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
     handler: 'CacheFirst',
@@ -42,3 +42,5 @@ module.exports = [
     },
   },
 ];
+
+export default runtimeCaching;

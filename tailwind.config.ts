@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
 // Spec-defined color scales (systematic 50-900 steps for the 7 core palette groups)
 const pichwaiScales = {
@@ -221,7 +222,7 @@ const config: Config = {
     },
   },
   plugins: [
-    require('tailwindcss-animate'),
+    tailwindcssAnimate,
   ],
 };
 

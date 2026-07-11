@@ -448,7 +448,7 @@ export default function CheckInPage() {
               )}
               {!isOnline && (
                 <p className="text-xs text-amber-300 mb-3">
-                  You're offline. Check-in will sync when you're back online.
+                  You&apos;re offline. Check-in will sync when you&apos;re back online.
                 </p>
               )}
               <div className="flex gap-3">

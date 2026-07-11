@@ -404,7 +404,7 @@ export default function VendorProfilePage({
                       {review.reviewText && <p className="mt-1 text-sm text-pichwai-brown-600">{review.reviewText}</p>}
                       {review.vendorResponse && (
                         <div className="mt-3 rounded-lg bg-pichwai-cream-100 p-3 text-sm">
-                          <p className="font-semibold text-pichwai-brown-700">Vendor's Response</p>
+                          <p className="font-semibold text-pichwai-brown-700">Vendor&apos;s Response</p>
                           <p className="mt-1 text-pichwai-brown-500">{review.vendorResponse}</p>
                         </div>
                       )}

@@ -100,7 +100,7 @@ function Step1EventType({ form }: { form: UseFormReturn<WizardFormData> }) {
         What are you celebrating?
       </h2>
       <p className="text-sm mb-6" style={{ color: '#5C3A1E' }}>
-        Select the type of event you're planning
+        Select the type of event you&apos;re planning
       </p>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">

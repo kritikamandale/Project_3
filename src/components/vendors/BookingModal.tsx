@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { X, CalendarDays, FileText, IndianRupee, Loader2 } from 'lucide-react';
@@ -146,7 +147,7 @@ export function BookingModal({ vendorId, onClose, onSuccess }: BookingModalProps
             {events.length === 0 && (
               <p className="mt-1 text-xs text-pichwai-brown-400">
                 No events found.{' '}
-                <a href="/host/events/new" className="text-pichwai-gold-600 underline">Create one first →</a>
+                <Link href="/host/events/new" className="text-pichwai-gold-600 underline">Create one first →</Link>
               </p>
             )}
             {errors.eventId && <p className="mt-1 text-xs text-red-500">{errors.eventId.message}</p>}
