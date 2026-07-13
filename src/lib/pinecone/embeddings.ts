@@ -1,4 +1,4 @@
-import { pinecone, PINECONE_INDEX } from './client';
+import { getPinecone, PINECONE_INDEX } from './client';
 import type { RecordMetadataValue } from '@pinecone-database/pinecone';
 import type { Vendor } from '@/types/vendor.types';
 
@@ -27,10 +27,11 @@ function vendorToText(vendor: Vendor): string {
 
 export async function upsertVendorEmbedding(vendor: Vendor): Promise<void> {
   try {
-    const index = pinecone.index<VendorMetadata>(PINECONE_INDEX);
+    const pc    = getPinecone();
+    const index = pc.index<VendorMetadata>(PINECONE_INDEX);
     const text  = vendorToText(vendor);
 
-    const result = await pinecone.inference.embed({
+    const result = await pc.inference.embed({
       model:      'multilingual-e5-large',
       inputs:     [text],
       parameters: { inputType: 'passage', truncate: 'END' },
@@ -65,9 +66,10 @@ export async function searchSimilarVendors(
   filters?: { category?: string; city?: string; minRating?: number },
 ): Promise<string[]> {
   try {
-    const index = pinecone.index<VendorMetadata>(PINECONE_INDEX);
+    const pc    = getPinecone();
+    const index = pc.index<VendorMetadata>(PINECONE_INDEX);
 
-    const result = await pinecone.inference.embed({
+    const result = await pc.inference.embed({
       model:      'multilingual-e5-large',
       inputs:     [query],
       parameters: { inputType: 'query', truncate: 'END' },
