@@ -5,8 +5,15 @@ import { buildEventReminderHtml }       from './templates/EventReminderEmail';
 import { buildRSVPConfirmationHtml }    from './templates/RSVPConfirmationEmail';
 import { buildVendorWelcomeHtml }       from './templates/VendorWelcomeEmail';
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
-const FROM   = process.env.RESEND_FROM_EMAIL ?? 'noreply@milap.in';
+const FROM   = process.env.RESEND_FROM_EMAIL ?? 'noreply@eventnest.in';
+
+function getResend(): Resend {
+  const key = process.env.RESEND_API_KEY;
+  if (!key || key.startsWith('your_')) {
+    throw new Error('RESEND_API_KEY is not configured.');
+  }
+  return new Resend(key);
+}
 
 // ── Booking Confirmation ──────────────────────────────────────────────────────
 
@@ -22,7 +29,7 @@ interface BookingConfirmationParams {
 export async function sendBookingConfirmationEmail(
   params: BookingConfirmationParams,
 ): Promise<void> {
-  await resend.emails.send({
+  await getResend().emails.send({
     from:    FROM,
     to:      params.to,
     subject: `Booking Confirmed — ${params.bookingRef} | Milap`,
@@ -44,7 +51,7 @@ interface PaymentReceiptParams {
 export async function sendPaymentReceiptEmail(
   params: PaymentReceiptParams,
 ): Promise<void> {
-  await resend.emails.send({
+  await getResend().emails.send({
     from:    FROM,
     to:      params.to,
     subject: `Payment Receipt — ${params.bookingRef} | Milap`,
@@ -68,7 +75,7 @@ interface EventReminderParams {
 export async function sendEventReminderEmail(
   params: EventReminderParams,
 ): Promise<void> {
-  await resend.emails.send({
+  await getResend().emails.send({
     from:    FROM,
     to:      params.to,
     subject: `Reminder: ${params.eventTitle} is Tomorrow! | Milap`,
@@ -90,7 +97,7 @@ interface RSVPConfirmationParams {
 export async function sendRSVPConfirmationEmail(
   params: RSVPConfirmationParams,
 ): Promise<void> {
-  await resend.emails.send({
+  await getResend().emails.send({
     from:    FROM,
     to:      params.to,
     subject: `RSVP ${params.rsvpStatus === 'confirmed' ? 'Confirmed' : 'Received'} — ${params.eventTitle} | Milap`,
@@ -110,7 +117,7 @@ interface VendorWelcomeParams {
 export async function sendVendorWelcomeEmail(
   params: VendorWelcomeParams,
 ): Promise<void> {
-  await resend.emails.send({
+  await getResend().emails.send({
     from:    FROM,
     to:      params.to,
     subject: `Welcome to Milap Vendor Marketplace, ${params.businessName}!`,

@@ -37,8 +37,15 @@ function err(msg: string, status: number) {
 }
 
 const APP_URL    = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
-const resend     = new Resend(process.env.RESEND_API_KEY!);
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? 'noreply@milap.in';
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? 'noreply@eventnest.in';
+
+function getResend(): Resend {
+  const key = process.env.RESEND_API_KEY;
+  if (!key || key.startsWith('your_')) {
+    throw new Error('RESEND_API_KEY is not configured.');
+  }
+  return new Resend(key);
+}
 
 function twilioClient() {
   return twilio(process.env.TWILIO_ACCOUNT_SID!, process.env.TWILIO_AUTH_TOKEN!);
@@ -101,7 +108,7 @@ async function sendEmail(
     personalMessage,
   });
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: FROM_EMAIL,
     to,
     subject: `You're invited to ${eventTitle} 🎉`,

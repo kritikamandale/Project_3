@@ -3,7 +3,7 @@ import { eq, and } from 'drizzle-orm';
 import { z } from 'zod/v4';
 import { cookies } from 'next/headers';
 import { verifyAccessToken } from '@/lib/auth/jwt';
-import { razorpay } from '@/lib/razorpay/client';
+import { getRazorpay } from '@/lib/razorpay/client';
 import { db, payments, bookings } from '@/lib/db';
 
 async function getAuthUser() {
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Create Razorpay order (amount in paise)
-  const order = await razorpay.orders.create({
+  const order = await getRazorpay().orders.create({
     amount:   Math.round(amount * 100),
     currency,
     receipt:  bookingId.slice(0, 40),

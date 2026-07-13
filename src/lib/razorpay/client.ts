@@ -2,11 +2,24 @@ import Razorpay from 'razorpay';
 
 const globalForRazorpay = globalThis as unknown as { razorpay: Razorpay | undefined };
 
-export const razorpay =
-  globalForRazorpay.razorpay ??
-  new Razorpay({
-    key_id:     process.env.RAZORPAY_KEY_ID!,
-    key_secret: process.env.RAZORPAY_KEY_SECRET!,
-  });
+/**
+ * Lazily initialise the Razorpay client so the module can be imported at
+ * build-time (when env vars may not yet be available) without crashing.
+ */
+export function getRazorpay(): Razorpay {
+  if (globalForRazorpay.razorpay) return globalForRazorpay.razorpay;
 
-if (process.env.NODE_ENV !== 'production') globalForRazorpay.razorpay = razorpay;
+  const key_id = process.env.RAZORPAY_KEY_ID;
+  const key_secret = process.env.RAZORPAY_KEY_SECRET;
+  if (!key_id || !key_secret) {
+    throw new Error('RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET must be set.');
+  }
+
+  const client = new Razorpay({ key_id, key_secret });
+
+  if (process.env.NODE_ENV !== 'production') {
+    globalForRazorpay.razorpay = client;
+  }
+
+  return client;
+}
