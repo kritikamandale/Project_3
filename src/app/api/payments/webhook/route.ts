@@ -6,7 +6,6 @@ import { sendPushToUser } from '@/lib/firebase/notifications';
 import { cacheGet, cacheSet } from '@/lib/redis/client';
 
 // Razorpay sends the raw body as text — must read before parsing
-export const config = { api: { bodyParser: false } };
 
 function verifyWebhookSignature(rawBody: string, signature: string): boolean {
   const secret = process.env.RAZORPAY_WEBHOOK_SECRET!;
